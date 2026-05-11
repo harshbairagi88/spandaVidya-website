@@ -1,18 +1,192 @@
+# spandavidya-ai-ayurvedic-pulse-diagnostics — AI-powered Ayurvedic pulse diagnostics platform
 
+> spandaVidya - AI-powered Ayurvedic pulse diagnostics platform combining traditional Naadi Pariksha with modern signal intelligence and machine learning for clinical-grade health assessments
 
-# Run and deploy your AI Studio app
+![License](https://img.shields.io/badge/License-UNLICENSED-blue)
+![Framework](https://img.shields.io/badge/Framework-React-blue)
+![Runtime](https://img.shields.io/badge/Runtime-Node.js-green)
 
-This contains everything you need to run your app locally.
+---
 
+## Project Overview
 
+spandaVidya is a web platform designed to represent an AI-powered Ayurvedic pulse diagnostics initiative. It focuses on bridging traditional Naadi Pariksha with modern signal intelligence, leveraging machine learning for clinical-grade health assessments.
 
-## Run Locally
+The project currently serves as a comprehensive landing page or single-page application detailing the initiative's approach, challenges, philosophy, and technology. It provides a visual and interactive experience using smooth animations.
 
-**Prerequisites:**  Node.js
+---
 
+## Features
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, Approach, Progress, and Philosophy.
+- **Scroll Animations**: Utilizes custom hooks (`useScrollReveal`, `useCountUp`) and GSAP for engaging scroll-based visibility and number counter animations.
+- **Responsive Components**: Includes reusable UI components like Buttons, Cards, Navbar, and Footer.
+
+---
+
+## Tech Stack
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| **React** (v19) | Core UI library for building component-based interfaces |
+| **TypeScript** | Static typing for improved code quality and developer experience |
+| **GSAP** | Advanced animations and timeline control |
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| [Not found in codebase] | |
+
+### Database & Storage
+| Technology | Purpose |
+|------------|---------|
+| [Not found in codebase] | |
+
+### Dev Tools & Deployment
+| Tool | Purpose |
+|------|---------|
+| **Vite** | Fast frontend build tool and development server |
+| **ESLint** | Code linting and formatting rules |
+
+---
+
+## Project Structure
+
+```
+project-root/
+├── components/
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── Footer.tsx
+│   └── Navbar.tsx
+├── sections/
+│   ├── Approach.tsx
+│   ├── Challenge.tsx
+│   ├── Contact.tsx
+│   ├── Differentiation.tsx
+│   ├── Hero.tsx
+│   ├── HeroSection.tsx
+│   ├── Mission.tsx
+│   ├── PhilosophySection.tsx
+│   ├── Progress.tsx
+│   └── TechSection.tsx
+├── App.tsx
+├── index.html
+├── index.tsx
+├── hooks.ts
+├── theme.ts
+├── types.ts
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
+
+---
+
+## Database Models
+[Not found in codebase]
+
+---
+
+## API Reference
+[Not found in codebase]
+
+---
+
+## Pages & Routes
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Main Landing | `/` | Single-page layout containing all content sections (Hero, Mission, Tech, etc.) |
+
+---
+
+## Authentication & Authorization
+[Not found in codebase]
+
+---
+
+## Third-Party Integrations
+
+| Service | Purpose | Library |
+|---------|---------|---------|
+| GSAP | Complex UI animations | `gsap` |
+
+---
+
+## Installation & Setup
+
+### Prerequisites
+- Node.js >= 18.0.0
+- npm >= 9.0.0
+
+### 1. Clone
+```bash
+git clone https://github.com/spandavidya/platform
+cd [project folder]
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Configure Environment
+Set up the necessary environment variables (see below).
+
+### 4. Start Development Server
+```bash
+npm run dev
+```
+*(Server will start on `0.0.0.0:3000`)*
+
+---
+
+## Environment Variables
+
+```env
+# ── Server ──────────────────────
+PORT=3000
+
+# ── API ─────────────────────────
+GEMINI_API_KEY=[Your Gemini API Key]
+```
+
+---
+
+## Available Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| `dev` | `vite` | Starts the Vite development server |
+| `build` | `vite build` | Builds the app for production |
+| `preview` | `vite preview` | Locally previews the production build |
+| `lint` | `eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0` | Runs ESLint to check for code issues |
+
+---
+
+## Deployment
+[Not found in codebase]
+
+---
+
+## Architecture Overview
+
+- **Overall pattern**: Component-based single-page application (SPA). The main view is assembled in `App.tsx` by importing modular sections and components.
+- **Styling**: Global CSS injected via `theme.ts` alongside utility classes (likely Tailwind, inferred from `className` usage in files like `App.tsx`).
+- **Logic**: Custom React hooks (`hooks.ts`) are used for scroll visibility tracking and animated counters.
+- **Config**: Vite is configured to map `GEMINI_API_KEY` to `process.env.API_KEY` for client-side usage if needed.
+
+---
+
+## Author
+
+**spandaVidya Research Initiative <contact@spandavidya.ai>**
+
+[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/spandavidya)
+[![Homepage](https://img.shields.io/badge/Website-blue?logo=vercel)](https://spandavidya.ai)
+
+---
+
+<p align="center">Built with ❤️ by <strong>SAM</strong></p>
