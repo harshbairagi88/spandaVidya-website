@@ -2,6 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { GLOBAL_CSS } from './theme';
+
+const style = document.createElement('style');
+style.textContent = GLOBAL_CSS;
+document.head.appendChild(style);
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
