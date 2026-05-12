@@ -8,6 +8,7 @@ const links: NavLink[] = [
   { label: 'Progress', href: '#progress' },
   { label: 'Mission', href: '#mission' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Team', href: '#team' },
 ];
 
 const Navbar: React.FC = () => {

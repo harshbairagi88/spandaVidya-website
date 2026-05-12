@@ -9,6 +9,7 @@ import Progress from './sections/Progress';
 import Differentiation from './sections/Differentiation';
 import Mission from './sections/Mission';
 import Contact from './sections/Contact';
+import Team from './sections/Teams';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Progress />
         <Differentiation />
         <Mission />
+        <Team />
         <Contact />
       </main>
       <Footer />
