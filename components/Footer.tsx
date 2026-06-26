@@ -1,3 +1,4 @@
+import React from 'react';
 import { branding, company, social } from '@/data';
 
 const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string }) => (

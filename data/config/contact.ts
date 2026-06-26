@@ -6,7 +6,7 @@ export interface ContactInformation {
 }
 
 export const contact = {
-  officialEmail: "contact@spandavidya.ai",
+  officialEmail: "spandavidyaai@gmail.com",
   supportEmail: "Dilpar99@gmail.com",
   location: "Advanced Health-Tech Research Hub",
   headquarters: "IIT Kanpur, India"

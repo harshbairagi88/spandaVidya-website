@@ -1,3 +1,4 @@
+import React from 'react';
 import { progressSteps } from '@/data';
 
 const steps = progressSteps;

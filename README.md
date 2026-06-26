@@ -12,7 +12,33 @@
 
 spandaVidya is a web platform designed to represent an AI-powered Ayurvedic pulse diagnostics initiative. It focuses on bridging traditional Naadi Pariksha with modern signal intelligence, leveraging machine learning for clinical-grade health assessments.
 
-The project currently serves as a comprehensive landing page or single-page application detailing the initiative's approach, challenges, philosophy, and technology. It provides a visual and interactive experience using smooth animations.
+---
+
+## SpandaVidya AI
+
+### Flagship Product: AI Cataract Detection & Analysis
+Our flagship AI application allows users to capture and upload ocular images to obtain instantaneous, secure, and clinical-grade cataract assessment.
+
+#### Workflow Pipeline
+1. **Capture Eye Image**: Mobile-guided viewfinder interface aligns camera optics.
+2. **Secure Upload**: End-to-end encrypted transfer via NestJS API.
+3. **AI Analysis**: EfficientNet-B3 neural networks process anterior segment structures.
+4. **Prediction**: Classification of cataract density stages with statistical certainty scoring.
+5. **Clinical Report**: Immediate generation of structured PDF assessment documents.
+
+#### Architecture & Tech Stack
+- **Mobile Client**: React Native cross-platform application.
+- **Backend API**: NestJS scalable node framework.
+- **Machine Learning**: EfficientNet-B3 model classification hosted on HuggingFace.
+- **Cloud Storage**: Highly secure, HIPAA-compliant AWS S3 storage buckets.
+- **Computer Vision**: Ocular targeting, region-of-interest segmentation, and optical preprocessing.
+
+---
+
+## Future AI Products
+- **Ayurvedic AI Consultation**: Conversational wellness consultation and Dosha guidance powered by Google Gemini.
+- **AI Pulse Diagnostics**: Digital arterial wave Naadi diagnostics combining high-fidelity PPG signal analysis with classical Ayurvedic science.
+- **Future AI Diagnostics**: Scalable API layer supporting external clinical models and integrations.
 
 ---
 
@@ -59,7 +85,20 @@ project-root/
 │   ├── Button.tsx
 │   ├── Card.tsx
 │   ├── Footer.tsx
-│   └── Navbar.tsx
+│   ├── Navbar.tsx
+│   ├── CataractAppPreview.tsx
+│   ├── CataractWorkflow.tsx
+│   └── TechStackItem.tsx
+├── data/
+│   ├── config/
+│   │   ├── branding.ts
+│   │   ├── company.ts
+│   │   └── ...
+│   ├── content/
+│   │   ├── team.ts
+│   │   ├── cataract-detection.ts
+│   │   └── ...
+│   └── index.ts
 ├── sections/
 │   ├── Approach.tsx
 │   ├── Challenge.tsx
@@ -70,7 +109,9 @@ project-root/
 │   ├── Mission.tsx
 │   ├── PhilosophySection.tsx
 │   ├── Progress.tsx
-│   └── TechSection.tsx
+│   ├── Teams.tsx
+│   ├── TechSection.tsx
+│   └── CataractDetection.tsx
 ├── App.tsx
 ├── index.html
 ├── index.tsx
@@ -79,7 +120,8 @@ project-root/
 ├── types.ts
 ├── package.json
 ├── tsconfig.json
-└── vite.config.ts
+├── vite.config.ts
+└── metadata.json
 ```
 
 ---

@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Approach from './sections/Approach';
 import Challenge from './sections/Challenge';
+import CataractDetection from './sections/CataractDetection';
 import Contact from './sections/Contact';
 import Differentiation from './sections/Differentiation';
 import Hero from './sections/Hero';
@@ -21,11 +22,12 @@ const App: React.FC = () => {
       </header>
       <main id="main-content" className="flex-grow focus:outline-none" tabIndex={-1}>
         <Hero />
+        <HeroSection />
         <Challenge />
+        <CataractDetection />
         <Approach />
         <Progress />
         <Differentiation />
-        <HeroSection />
         <Mission />
         <PhilosophySection />
         <TechSection />
