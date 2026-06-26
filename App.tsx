@@ -15,9 +15,24 @@ import Team from './sections/Teams';
 import TechSection from './sections/TechSection';
 import PrivacyPolicy from './sections/PrivacyPolicy';
 import TermsAndConditions from './sections/TermsAndConditions';
+import { useSEO } from './hooks';
 
 const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useSEO({
+    title: currentPath === '/privacy'
+      ? "Privacy Policy & Security | SpandaVidya"
+      : currentPath === '/terms'
+        ? "Terms & Conditions | SpandaVidya"
+        : "spandaVidya | AI-Powered Ayurvedic Pulse Diagnosis & Digital Naadi Pariksha",
+    description: currentPath === '/privacy'
+      ? "Privacy Policy and Security guidelines for SpandaVidya AI Cataract Detection. Understand our data safety, authentication, and clinical disclosures."
+      : currentPath === '/terms'
+        ? "Terms and Conditions of service for the SpandaVidya AI Cataract Detection and Consultation platform."
+        : "spandaVidya revolutionizes traditional Ayurvedic pulse diagnostics (Naadi Pariksha) with AI-powered signal intelligence. Get accurate, clinical-grade health assessments using advanced PPG sensors and machine learning for personalized Ayurvedic wellness.",
+    path: currentPath === '/privacy' ? '/privacy' : currentPath === '/terms' ? '/terms' : '/'
+  });
 
   useEffect(() => {
     const handleLocationChange = () => {

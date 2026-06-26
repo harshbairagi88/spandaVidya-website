@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { T } from '../theme';
 import Card from '../components/Card';
 import { termsAndConditionsContent, branding } from '@/data';
+import { useSEO } from '../hooks';
 
 interface TermsAndConditionsProps {
   onNavigate: (path: string) => void;
 }
 
 const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onNavigate }) => {
+  useSEO({
+    title: "Terms & Conditions | SpandaVidya",
+    description: "Terms and Conditions of service for the SpandaVidya AI Cataract Detection and Consultation platform.",
+    path: "/terms"
+  });
+
   useEffect(() => {
-    // Set document meta/title for SEO
-    document.title = "Terms & Conditions | SpandaVidya";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute("content", "Terms and Conditions of service for the SpandaVidya AI Cataract Detection and Consultation platform.");
-    }
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

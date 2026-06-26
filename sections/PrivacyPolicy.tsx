@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { T } from '../theme';
 import Card from '../components/Card';
 import { privacyPolicyContent, securityContent, branding } from '@/data';
+import { useSEO } from '../hooks';
 
 interface PrivacyPolicyProps {
   onNavigate: (path: string) => void;
 }
 
 const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onNavigate }) => {
+  useSEO({
+    title: "Privacy Policy & Security | SpandaVidya",
+    description: "Privacy Policy and Security guidelines for SpandaVidya AI Cataract Detection. Understand our data safety, authentication, and clinical disclosures.",
+    path: "/privacy"
+  });
+
   useEffect(() => {
-    // Set document meta/title for SEO
-    document.title = "Privacy Policy & Security | SpandaVidya";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute("content", "Privacy Policy and Security guidelines for SpandaVidya AI Cataract Detection. Understand our data safety, authentication, and clinical disclosures.");
-    }
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
