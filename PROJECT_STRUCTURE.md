@@ -7,6 +7,7 @@
 ./components/CataractAppPreview.tsx
 ./components/CataractWorkflow.tsx
 ./components/Footer.tsx
+./components/GlobalBackground.tsx
 ./components/Navbar.tsx
 ./components/TechStackItem.tsx
 ./data
@@ -24,8 +25,10 @@
 ./data/content/differentiation.ts
 ./data/content/index.ts
 ./data/content/philosophy.ts
+./data/content/privacy.ts
 ./data/content/progress.ts
 ./data/content/team.ts
+./data/content/terms.ts
 ./data/index.ts
 ./hooks.ts
 ./htaccess
@@ -55,12 +58,13 @@
 ./sections/Contact.tsx
 ./sections/Differentiation.tsx
 ./sections/Hero.tsx
-./sections/HeroSection.tsx
 ./sections/Mission.tsx
 ./sections/PhilosophySection.tsx
+./sections/PrivacyPolicy.tsx
 ./sections/Progress.tsx
 ./sections/Teams.tsx
 ./sections/TechSection.tsx
+./sections/TermsAndConditions.tsx
 ./sitemap.xml
 ./theme.ts
 ./tsconfig.json

@@ -1,38 +1,242 @@
 import React from 'react';
-import { branding, company, social } from '@/data';
+import { branding, company, social, contact, navigationLinks } from '@/data';
+import { T } from '../theme';
+import Button from './Button';
+import Card from './Card';
 
-const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string }) => (
-  <a 
-    href={href} 
-    aria-label={label}
-    className="w-11 h-11 rounded-full bg-brand-bg flex items-center justify-center text-brand-muted hover:bg-brand-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1.5 shadow-sm hover:shadow-lg"
-  >
-    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-      <path d={d} />
-    </svg>
-  </a>
-);
+interface FooterProps {
+  onNavigate?: (path: string) => void;
+  currentPath?: string;
+}
 
-const Footer: React.FC = () => {
+const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
-    <footer className="py-20 px-6 md:px-[8vw] border-t border-black/5 bg-white">
+    <a 
+      href={href} 
+      aria-label={label}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md"
+      style={{
+        backgroundColor: isHovered ? T.accent : T.cream,
+        color: isHovered ? T.ivory : T.muted,
+        border: `1px solid ${isHovered ? T.accent : "rgba(26, 24, 20, 0.06)"}`,
+      }}
+    >
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d={d} />
+      </svg>
+    </a>
+  );
+};
+
+const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
+  return (
+    <footer 
+      role="contentinfo"
+      className="py-20 px-6 md:px-[8vw] bg-transparent"
+      style={{ borderTop: T.border.light }}
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 items-start gap-16 mb-16">
-          {/* Brand & Mission */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="font-serif text-3xl font-bold text-brand-text tracking-tight flex items-center gap-2">
-              <div className="w-20 h-16 rounded-xl flex items-center justify-center text-white text-[10px] font-sans"> <img className="w-full h-full object-contain" src={branding.logo} alt={`${branding.title} Logo`} /></div>
-              {branding.title}
+        
+        {/* 1. Final CTA Section above the footer (only on Home route) */}
+        {currentPath === '/' && (
+          <Card className="mb-24 p-12 md:p-16 text-center max-w-6xl mx-auto overflow-hidden relative border bg-transparent">
+            {/* Ambient decorative glow inside the card */}
+            <div 
+              className="absolute -top-24 -left-24 w-48 h-48 rounded-full pointer-events-none"
+              style={{
+                backgroundColor: `${T.accent}08`,
+                filter: 'blur(40px)',
+              }}
+            />
+            <div 
+              className="absolute -bottom-24 -right-24 w-48 h-48 rounded-full pointer-events-none"
+              style={{
+                backgroundColor: `${T.accentWarm}06`,
+                filter: 'blur(40px)',
+              }}
+            />
+            
+            <h3 className="font-serif text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ color: T.charcoal }}>
+              Pioneering Ocular & Ayurvedic Signal Intelligence
+            </h3>
+            <p className="text-base md:text-lg mb-8 max-w-2xl mx-auto font-light leading-relaxed" style={{ color: T.muted }}>
+              Join our active clinical research initiative or experience our AI-powered cataract screening assistant today.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button href="#cataract-detection">Launch Screening App</Button>
+              <Button href="#contact" variant="outline">Collaborate with Us</Button>
             </div>
-            <p className="text-brand-muted text-sm text-center md:text-left leading-relaxed max-w-xs">
+          </Card>
+        )}
+
+        {/* 2. Main Footer Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-16 text-left">
+          {/* Column 1: Brand */}
+          <div className="flex flex-col space-y-5">
+            <div className="flex items-center gap-3">
+              <img 
+                className="h-10 w-auto object-contain" 
+                src={branding.logo} 
+                alt={`${branding.title} Logo`} 
+              />
+              <span 
+                className="font-serif text-2xl font-bold tracking-tight"
+                style={{ color: T.charcoal }}
+              >
+                {branding.title}
+              </span>
+            </div>
+            <p className="text-sm leading-relaxed max-w-xs" style={{ color: T.muted }}>
               {company.description}
             </p>
           </div>
 
-          {/* Connect & Social */}
-          <div className="flex flex-col items-center space-y-6">
-            <h4 className="font-semibold text-brand-text uppercase tracking-widest text-xs">Stay Connected</h4>
-            <div className="flex justify-center gap-5">
+          {/* Column 2: Navigation */}
+          <div className="flex flex-col space-y-4">
+            <h4 
+              className="font-semibold uppercase tracking-widest text-[11px]" 
+              style={{ color: T.charcoal }}
+            >
+              Navigation
+            </h4>
+            <div className="flex flex-col gap-3 text-sm">
+              {navigationLinks.map((link) => (
+                <a 
+                  key={link.href}
+                  href={currentPath === '/' ? link.href : `/${link.href}`}
+                  onClick={(e) => {
+                    if (currentPath !== '/' && onNavigate) {
+                      e.preventDefault();
+                      onNavigate('/');
+                      // Wait a tick for section render then scroll
+                      setTimeout(() => {
+                        const target = document.querySelector(link.href);
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                      }, 50);
+                    }
+                  }}
+                  className="hover:opacity-100 transition-opacity w-fit" 
+                  style={{ color: T.muted, opacity: 0.8 }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Products */}
+          <div className="flex flex-col space-y-4">
+            <h4 
+              className="font-semibold uppercase tracking-widest text-[11px]" 
+              style={{ color: T.charcoal }}
+            >
+              Platform
+            </h4>
+            <div className="flex flex-col gap-3 text-sm">
+              <a 
+                href="#cataract-detection"
+                onClick={(e) => {
+                  if (currentPath !== '/' && onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/');
+                    setTimeout(() => {
+                      const target = document.querySelector('#cataract-detection');
+                      if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                  }
+                }}
+                className="hover:opacity-100 transition-opacity w-fit" 
+                style={{ color: T.muted, opacity: 0.8 }}
+              >
+                AI Cataract Detection
+              </a>
+              <a 
+                href="#philosophy"
+                onClick={(e) => {
+                  if (currentPath !== '/' && onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/');
+                    setTimeout(() => {
+                      const target = document.querySelector('#philosophy');
+                      if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                  }
+                }}
+                className="hover:opacity-100 transition-opacity w-fit" 
+                style={{ color: T.muted, opacity: 0.8 }}
+              >
+                AI Naadi Consultation
+              </a>
+              <a 
+                href="#technology"
+                onClick={(e) => {
+                  if (currentPath !== '/' && onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/');
+                    setTimeout(() => {
+                      const target = document.querySelector('#technology');
+                      if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                  }
+                }}
+                className="hover:opacity-100 transition-opacity w-fit" 
+                style={{ color: T.muted, opacity: 0.8 }}
+              >
+                Research Architecture
+              </a>
+            </div>
+          </div>
+
+          {/* Column 4: Contact */}
+          <div className="flex flex-col space-y-4">
+            <h4 
+              className="font-semibold uppercase tracking-widest text-[11px]" 
+              style={{ color: T.charcoal }}
+            >
+              Inquiries
+            </h4>
+            <div className="flex flex-col gap-4 text-sm" style={{ color: T.muted }}>
+              <div>
+                <p className="text-[10px] uppercase font-bold tracking-wider mb-1" style={{ color: T.charcoal }}>Official Email</p>
+                <a 
+                  href={`mailto:${contact.officialEmail}`} 
+                  className="hover:opacity-100 transition-opacity break-all"
+                  style={{ color: T.accent, opacity: 0.9 }}
+                >
+                  {contact.officialEmail}
+                </a>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase font-bold tracking-wider mb-1" style={{ color: T.charcoal }}>Support Email</p>
+                <a 
+                  href={`mailto:${contact.supportEmail}`} 
+                  className="hover:opacity-100 transition-opacity break-all"
+                  style={{ color: T.accent, opacity: 0.9 }}
+                >
+                  {contact.supportEmail}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 5: Stay Connected & Socials */}
+          <div className="flex flex-col space-y-5">
+            <h4 
+              className="font-semibold uppercase tracking-widest text-[11px]" 
+              style={{ color: T.charcoal }}
+            >
+              Stay Connected
+            </h4>
+            <p className="text-sm leading-relaxed" style={{ color: T.muted }}>
+              Follow our research initiatives and clinical updates.
+            </p>
+            <div className="flex gap-3">
               <SocialIcon 
                 label="Instagram"
                 href={social.instagram}
@@ -50,27 +254,89 @@ const Footer: React.FC = () => {
               />
             </div>
           </div>
+        </div>
 
-          {/* Quick Links & Info */}
-          <div className="flex flex-col items-center md:items-end space-y-4">
-            <div className="text-brand-text font-bold text-sm">Research Hub</div>
-            <div className="flex flex-col items-center md:items-end gap-2 text-brand-muted text-xs uppercase tracking-widest font-semibold">
-              <a href="#home" className="hover:text-brand-accent transition-colors">Home</a>
-              <a href="#approach" className="hover:text-brand-accent transition-colors">Approach</a>
-              <a href="#progress" className="hover:text-brand-accent transition-colors">Timeline</a>
-              <a href="#contact" className="hover:text-brand-accent transition-colors">Collaborate</a>
+        {/* 3. Quick Statistics / Trust Badges */}
+        <div 
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-10 border-t border-b mb-16 text-center md:text-left"
+          style={{ borderColor: "rgba(26, 24, 20, 0.08)" }}
+        >
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
+              <span className="w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: T.accent }} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>AI Powered</p>
+              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Gemini & Custom Vision</p>
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: T.sage }} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Privacy First</p>
+              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>TLS 1.3 & AWS S3 Encrypted</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
+              <span className="w-2.5 h-2.5 rounded-full animate-bounce" style={{ backgroundColor: T.accentWarm }} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Research Driven</p>
+              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Ayurvedic Pulse Mapping</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: T.sagePale }} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Made in India</p>
+              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Engineered at IIT Kanpur</p>
             </div>
           </div>
         </div>
 
-        {/* Legal Bottom Bar */}
-        <div className="pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-brand-muted text-[11px] font-medium tracking-wide uppercase">
+        {/* 4. Bottom Bar */}
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6" style={{ borderTop: T.border.light }}>
+          <div className="text-[11px] font-medium tracking-wide uppercase text-center md:text-left" style={{ color: T.muted }}>
             &copy; {new Date().getFullYear()} {company.author} • All Rights Reserved
           </div>
-          <div className="flex gap-8">
-            <a href="#" className="text-brand-muted hover:text-brand-accent transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">Privacy Policy</a>
-            <a href="#" className="text-brand-muted hover:text-brand-accent transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">Medical Disclaimer</a>
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            <a 
+              href="/privacy" 
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('/privacy');
+                }
+              }}
+              className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
+              style={{ color: T.muted, opacity: 0.8 }}
+            >
+              Privacy Policy
+            </a>
+            <a 
+              href="/terms" 
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('/terms');
+                }
+              }}
+              className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
+              style={{ color: T.muted, opacity: 0.8 }}
+            >
+              Terms & Conditions
+            </a>
+          </div>
+          <div className="text-[9px] font-mono tracking-wider text-center md:text-right" style={{ color: T.muted, opacity: 0.7 }}>
+            Secure Server-Side AI • TLS 1.3 Encryption
           </div>
         </div>
       </div>

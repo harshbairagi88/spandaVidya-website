@@ -33,9 +33,9 @@ export const cataractHero = {
   title: "AI Cataract Detection\nPowered by SpandaVidya AI",
   description: "Upload eye images through the SpandaVidya AI mobile application to receive AI-assisted cataract analysis. Powered by computer vision and deep learning, the system provides instant, secure, and reliable clinical assessments.",
   ctaDownloadText: "Download App",
-  ctaDownloadHref: "https://spandavidya.ai/download",
+  ctaDownloadHref: "https://drive.google.com/drive/folders/1bD0n2DUudqTkjEFt3JOjVrHUdHw7Y-Ah?usp=sharing",
   ctaLearnMoreText: "Learn More",
-  ctaLearnMoreHref: "#workflow"
+  ctaLearnMoreHref: "https://github.com/sameer2210/SpandaVidyaAi-App"
 } as const satisfies CataractHeroData;
 
 export const cataractCapabilities = [

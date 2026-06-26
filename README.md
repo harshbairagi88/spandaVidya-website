@@ -85,6 +85,7 @@ project-root/
 │   ├── Button.tsx
 │   ├── Card.tsx
 │   ├── Footer.tsx
+│   ├── GlobalBackground.tsx
 │   ├── Navbar.tsx
 │   ├── CataractAppPreview.tsx
 │   ├── CataractWorkflow.tsx
@@ -105,7 +106,6 @@ project-root/
 │   ├── Contact.tsx
 │   ├── Differentiation.tsx
 │   ├── Hero.tsx
-│   ├── HeroSection.tsx
 │   ├── Mission.tsx
 │   ├── PhilosophySection.tsx
 │   ├── Progress.tsx

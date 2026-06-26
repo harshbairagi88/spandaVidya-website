@@ -5,6 +5,7 @@ import { cataractHero, cataractCapabilities, upcomingFeatures } from '@/data';
 import Button from '@/components/Button';
 import CataractAppPreview from '@/components/CataractAppPreview';
 import CataractWorkflow from '@/components/CataractWorkflow';
+import { T } from '../theme';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,31 +91,31 @@ const CataractDetection: React.FC = () => {
     <section
       ref={sectionRef}
       id="cataract-detection"
-      className="py-32 px-6 md:px-[8vw] bg-[#F8F5EF] relative overflow-hidden border-t border-black/5"
+      className="py-32 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
+      style={{ borderTop: T.border.light }}
     >
-      {/* Background Grid Layout Alignment Lines */}
-      <div className="absolute inset-y-0 left-[8vw] w-px bg-brand-accent/10 pointer-events-none hidden md:block" />
-      <div className="absolute inset-y-0 right-[8vw] w-px bg-brand-accent/10 pointer-events-none hidden md:block" />
-
-      {/* Glassmorphic Background Blur Rings */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
-
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Flagship Hero Title Area */}
         <div ref={heroRef} className="text-center max-w-4xl mx-auto mb-20">
           {/* Badge */}
-          <span className="inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full bg-brand-accent/5 border border-brand-accent/15 text-brand-accent text-[11px] font-bold uppercase tracking-[0.2em] mb-8 shadow-sm">
+          <span 
+            className="inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full border text-[11px] font-bold uppercase tracking-[0.2em] mb-8 shadow-sm"
+            style={{
+              backgroundColor: "rgba(140, 107, 62, 0.05)",
+              borderColor: "rgba(140, 107, 62, 0.15)",
+              color: T.accent,
+            }}
+          >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: T.accent }}></span>
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: T.accent }}></span>
             </span>
             {cataractHero.badge}
           </span>
 
           {/* Main Title */}
-          <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-text leading-[1.1] mb-6">
+          <h2 className="font-serif text-5xl md:text-7xl font-bold leading-[1.1] mb-6" style={{ color: T.charcoal }}>
             {cataractHero.title.split('\n').map((line, i) => (
               <React.Fragment key={i}>
                 {line}
@@ -124,7 +125,7 @@ const CataractDetection: React.FC = () => {
           </h2>
 
           {/* Description */}
-          <p className="text-brand-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10 font-light" style={{ color: T.muted }}>
             {cataractHero.description}
           </p>
 
@@ -157,13 +158,13 @@ const CataractDetection: React.FC = () => {
           {/* Right Block: Capabilities List */}
           <div ref={featuresRef} className="lg:col-span-7 flex flex-col h-full justify-center">
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-brand-accent">
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: T.accent }} />
+              <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: T.accent }}>
                 Technical Specifications
               </span>
             </div>
 
-            <h3 className="font-serif text-3xl md:text-4xl font-semibold text-brand-text mb-8 leading-tight">
+            <h3 className="font-serif text-3xl md:text-4xl font-semibold mb-8 leading-tight" style={{ color: T.charcoal }}>
               High-Fidelity Anterior Segment Intelligence
             </h3>
 
@@ -171,9 +172,16 @@ const CataractDetection: React.FC = () => {
             <ul className="space-y-6">
               {cataractCapabilities.map((feature) => (
                 <li key={feature.id} className="flex items-start group">
-                  <div className="w-5 h-5 rounded-full bg-brand-accent/5 border border-brand-accent/25 flex items-center justify-center mr-4 mt-1 flex-shrink-0 group-hover:border-brand-accent/50 transition-colors duration-300">
+                  <div 
+                    className="w-5 h-5 rounded-full border flex items-center justify-center mr-4 mt-1 flex-shrink-0 transition-colors duration-300"
+                    style={{
+                      backgroundColor: "rgba(140, 107, 62, 0.05)",
+                      borderColor: "rgba(140, 107, 62, 0.25)",
+                    }}
+                  >
                     <svg
-                      className="w-3 h-3 text-brand-accent"
+                      className="w-3 h-3"
+                      style={{ color: T.accent }}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -185,10 +193,10 @@ const CataractDetection: React.FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-base font-bold text-brand-text mb-1 group-hover:text-brand-accent transition-colors duration-300">
+                    <h4 className="text-base font-bold mb-1 transition-colors duration-300" style={{ color: T.charcoal }}>
                       {feature.title}
                     </h4>
-                    <p className="text-brand-muted text-sm leading-relaxed">
+                    <p className="text-sm leading-relaxed" style={{ color: T.muted }}>
                       {feature.description}
                     </p>
                   </div>
