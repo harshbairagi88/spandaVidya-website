@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { T } from '../theme';
-import { teamMembers } from '@/data';
+import { teamMembers, TeamMember } from '@/data';
 
-const TeamCard: React.FC<{ member: typeof teamMembers[0] }> = ({ member }) => {
+const TeamCard: React.FC<{ member: TeamMember }> = ({ member }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

@@ -4,3 +4,4 @@ export * from './contact';
 export * from './navigation';
 export * from './social';
 export * from './urls';
+export * from './seo';

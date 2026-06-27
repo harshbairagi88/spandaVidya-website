@@ -1,13 +1,10 @@
 import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { branding, company, social, contact, navigationLinks } from '@/data';
 import { T } from '../theme';
 import Button from './Button';
 import Card from './Card';
-
-interface FooterProps {
-  onNavigate?: (path: string) => void;
-  currentPath?: string;
-}
+import { ROUTES, HASH_ROUTES } from '../router';
 
 const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string }) => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -34,7 +31,22 @@ const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string
   );
 };
 
-const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
+const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const navigateToSection = (hash: string) => {
+    const sectionId = hash.replace('#', '');
+    if (currentPath !== ROUTES.HOME) {
+      navigate(`${ROUTES.HOME}#${sectionId}`);
+    } else {
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   return (
     <footer 
       role="contentinfo"
@@ -44,7 +56,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
       <div className="max-w-7xl mx-auto">
         
         {/* 1. Final CTA Section above the footer (only on Home route) */}
-        {currentPath === '/' && (
+        {currentPath === ROUTES.HOME && (
           <Card className="mb-24 p-12 md:p-16 text-center max-w-6xl mx-auto overflow-hidden relative border bg-transparent">
             {/* Ambient decorative glow inside the card */}
             <div 
@@ -69,8 +81,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
               Join our active clinical research initiative or experience our AI-powered cataract screening assistant today.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="#cataract-detection">Launch Screening App</Button>
-              <Button href="#contact" variant="outline">Collaborate with Us</Button>
+              <Button href={`#${HASH_ROUTES.CATARACT_DETECTION}`}>Launch Screening App</Button>
+              <Button href={`#${HASH_ROUTES.CONTACT}`} variant="outline">Collaborate with Us</Button>
             </div>
           </Card>
         )}
@@ -109,17 +121,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
               {navigationLinks.map((link) => (
                 <a 
                   key={link.href}
-                  href={currentPath === '/' ? link.href : `/${link.href}`}
+                  href={currentPath === ROUTES.HOME ? link.href : `${ROUTES.HOME}${link.href}`}
                   onClick={(e) => {
-                    if (currentPath !== '/' && onNavigate) {
-                      e.preventDefault();
-                      onNavigate('/');
-                      // Wait a tick for section render then scroll
-                      setTimeout(() => {
-                        const target = document.querySelector(link.href);
-                        if (target) target.scrollIntoView({ behavior: 'smooth' });
-                      }, 50);
-                    }
+                    e.preventDefault();
+                    navigateToSection(link.href);
                   }}
                   className="hover:opacity-100 transition-opacity w-fit" 
                   style={{ color: T.muted, opacity: 0.8 }}
@@ -140,16 +145,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
             </h4>
             <div className="flex flex-col gap-3 text-sm">
               <a 
-                href="#cataract-detection"
+                href={`#${HASH_ROUTES.CATARACT_DETECTION}`}
                 onClick={(e) => {
-                  if (currentPath !== '/' && onNavigate) {
-                    e.preventDefault();
-                    onNavigate('/');
-                    setTimeout(() => {
-                      const target = document.querySelector('#cataract-detection');
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }
+                  e.preventDefault();
+                  navigateToSection(`#${HASH_ROUTES.CATARACT_DETECTION}`);
                 }}
                 className="hover:opacity-100 transition-opacity w-fit" 
                 style={{ color: T.muted, opacity: 0.8 }}
@@ -157,16 +156,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
                 AI Cataract Detection
               </a>
               <a 
-                href="#philosophy"
+                href={`#${HASH_ROUTES.PHILOSOPHY}`}
                 onClick={(e) => {
-                  if (currentPath !== '/' && onNavigate) {
-                    e.preventDefault();
-                    onNavigate('/');
-                    setTimeout(() => {
-                      const target = document.querySelector('#philosophy');
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }
+                  e.preventDefault();
+                  navigateToSection(`#${HASH_ROUTES.PHILOSOPHY}`);
                 }}
                 className="hover:opacity-100 transition-opacity w-fit" 
                 style={{ color: T.muted, opacity: 0.8 }}
@@ -174,16 +167,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
                 AI Naadi Consultation
               </a>
               <a 
-                href="#technology"
+                href={`#${HASH_ROUTES.TECHNOLOGY}`}
                 onClick={(e) => {
-                  if (currentPath !== '/' && onNavigate) {
-                    e.preventDefault();
-                    onNavigate('/');
-                    setTimeout(() => {
-                      const target = document.querySelector('#technology');
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }
+                  e.preventDefault();
+                  navigateToSection(`#${HASH_ROUTES.TECHNOLOGY}`);
                 }}
                 className="hover:opacity-100 transition-opacity w-fit" 
                 style={{ color: T.muted, opacity: 0.8 }}
@@ -308,32 +295,20 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentPath = '/' }) => {
             &copy; {new Date().getFullYear()} {company.author} • All Rights Reserved
           </div>
           <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-            <a 
-              href="/privacy" 
-              onClick={(e) => {
-                if (onNavigate) {
-                  e.preventDefault();
-                  onNavigate('/privacy');
-                }
-              }}
+            <Link 
+              to={ROUTES.PRIVACY}
               className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
               style={{ color: T.muted, opacity: 0.8 }}
             >
               Privacy Policy
-            </a>
-            <a 
-              href="/terms" 
-              onClick={(e) => {
-                if (onNavigate) {
-                  e.preventDefault();
-                  onNavigate('/terms');
-                }
-              }}
+            </Link>
+            <Link 
+              to={ROUTES.TERMS}
               className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
               style={{ color: T.muted, opacity: 0.8 }}
             >
               Terms & Conditions
-            </a>
+            </Link>
           </div>
           <div className="text-[9px] font-mono tracking-wider text-center md:text-right" style={{ color: T.muted, opacity: 0.7 }}>
             Secure Server-Side AI • TLS 1.3 Encryption

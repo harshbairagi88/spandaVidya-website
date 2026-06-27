@@ -3,7 +3,7 @@ import { cataractWorkflow } from '@/data';
 import { T } from '../theme';
 
 interface WorkflowStepProps {
-  item: typeof cataractWorkflow[0];
+  item: typeof cataractWorkflow[number];
   idx: number;
 }
 

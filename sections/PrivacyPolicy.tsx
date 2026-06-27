@@ -2,22 +2,11 @@ import React, { useEffect } from 'react';
 import { T } from '../theme';
 import Card from '../components/Card';
 import { privacyPolicyContent, securityContent, branding } from '@/data';
-import { useSEO } from '../hooks';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../router';
 
-interface PrivacyPolicyProps {
-  onNavigate: (path: string) => void;
-}
-
-const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onNavigate }) => {
-  useSEO({
-    title: "Privacy Policy & Security | SpandaVidya",
-    description: "Privacy Policy and Security guidelines for SpandaVidya AI Cataract Detection. Understand our data safety, authentication, and clinical disclosures.",
-    path: "/privacy"
-  });
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+const PrivacyPolicy: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
     <section className="py-32 px-6 md:px-[8vw] bg-transparent relative min-h-screen">
@@ -25,7 +14,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onNavigate }) => {
         {/* Navigation / Header */}
         <div className="flex justify-between items-center mb-16 border-b pb-6" style={{ borderColor: "rgba(26, 24, 20, 0.08)" }}>
           <button 
-            onClick={() => onNavigate('/')}
+            onClick={() => navigate(ROUTES.HOME)}
             className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-80"
             style={{ color: T.accent }}
             aria-label="Back to Home Page"
