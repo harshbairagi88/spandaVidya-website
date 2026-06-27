@@ -4,7 +4,7 @@ import { useScrollReveal } from "../hooks";
 import { doshas } from '@/data';
 
 interface DoshaCardProps {
-  d: typeof doshas[0];
+  d: typeof doshas[number];
   index: number;
   visible: boolean;
 }

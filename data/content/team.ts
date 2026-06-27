@@ -9,7 +9,7 @@ export const teamMembers = [
   {
     name: 'Rahul Gupta',
     role: 'CEO & Founder',
-    // image: '/rahul.jpeg',
+    image: '/rahul.jpeg',
     description:
       'Accomplished senior leader with 20+ years of experience across regulatory governance, legal advisory, aviation operations, technical education. Holds M Tech in Rf and Microwave Engg and Aeronautical Engg from IIT Kanpur and JNTU, Medical Laws from NLSIU and DBRAU, and an MBA',
   },

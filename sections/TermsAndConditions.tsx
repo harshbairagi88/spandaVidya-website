@@ -2,22 +2,11 @@ import React, { useEffect } from 'react';
 import { T } from '../theme';
 import Card from '../components/Card';
 import { termsAndConditionsContent, branding } from '@/data';
-import { useSEO } from '../hooks';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../router';
 
-interface TermsAndConditionsProps {
-  onNavigate: (path: string) => void;
-}
-
-const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onNavigate }) => {
-  useSEO({
-    title: "Terms & Conditions | SpandaVidya",
-    description: "Terms and Conditions of service for the SpandaVidya AI Cataract Detection and Consultation platform.",
-    path: "/terms"
-  });
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+const TermsAndConditions: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
     <section className="py-32 px-6 md:px-[8vw] bg-transparent relative min-h-screen">
@@ -25,7 +14,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onNavigate }) =
         {/* Navigation / Header */}
         <div className="flex justify-between items-center mb-16 border-b pb-6" style={{ borderColor: "rgba(26, 24, 20, 0.08)" }}>
           <button 
-            onClick={() => onNavigate('/')}
+            onClick={() => navigate(ROUTES.HOME)}
             className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-80"
             style={{ color: T.accent }}
             aria-label="Back to Home Page"
