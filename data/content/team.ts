@@ -34,13 +34,7 @@ export const teamMembers = [
     description:
       'Experienced Senior Leader handling operations, partnerships, and strategic execution for organizational growth and institutional coordination.',
   },
-  {
-    name: 'Dr. Jyoti Dimri',
-    role: 'CVO & Ayurvedic Expert',
-    image: '/jyoti.jpeg',
-    description:
-      'BAMS, Patanjali Ayurvedic Hospital (MHA) with expertise in Ayurvedic healthcare and patient-centered wellness practices.',
-  },
+  
   {
     name: 'Sameer Khan',
     role: 'Full Stack Developer',
