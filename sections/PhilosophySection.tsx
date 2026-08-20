@@ -92,7 +92,7 @@ export default function PhilosophySection() {
             className={`reveal ${visible ? "visible" : ""} inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5`} 
             style={{ color: T.accent }}
           >
-            04 — Philosophy
+             Philosophy
           </span>
           <div className="flex flex-wrap lg:flex-nowrap items-start gap-12 lg:gap-16">
             <h2 

@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className="py-32 px-6 md:px-[8vw] bg-transparent">
+    <section ref={sectionRef} id="contact" className="py-0 px-6 md:px-[8vw] bg-transparent">
       <div 
         className="max-w-6xl mx-auto p-8 md:p-12 relative overflow-hidden"
         style={{
@@ -111,7 +111,7 @@ const Contact: React.FC = () => {
               className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5"
               style={{ color: T.accent }}
             >
-              06 - Contact
+              Contact
             </div>
             <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-5 leading-tight" style={{ color: T.charcoal }}>
               Connect with <br />{branding.title}

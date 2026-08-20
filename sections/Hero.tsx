@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
     <section 
       ref={sectionRef} 
       id="home" 
-      className="relative min-h-screen flex items-center px-6 md:px-[8vw] py-32 overflow-hidden bg-transparent"
+      className="relative min-h-screen flex items-center px-6 md:px-[8vw] py-2 overflow-hidden bg-transparent"
     >
       <div className="relative z-10 max-w-5xl">
         <div 
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
           <Button href="#approach" className="shadow-xl">Our Technology</Button>
           <Button href="#contact" variant="outline">Partner & Collaborate</Button>
           <Button href={urls.chatbotUrl} variant="outline">
-            Try Spandhvidya Chatbot
+            Try Spandvidya Chatbot
           </Button>
         </div>
       </div>

@@ -57,7 +57,7 @@ const Challenge: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 px-6 md:px-[8vw] bg-transparent overflow-hidden">
+    <section ref={sectionRef} className="py-6 px-6 md:px-[8vw] bg-red-500 overflow-hidden">
       <div className="grid md:grid-cols-2 gap-20 items-center">
         <article ref={contentRef}>
           <header className="mb-10">
@@ -65,7 +65,7 @@ const Challenge: React.FC = () => {
               className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5" 
               style={{ color: T.accent }}
             >
-              01 — Challenge
+              Challenge
             </span>
             <h2 className="font-serif text-5xl md:text-6xl font-semibold leading-tight" style={{ color: T.charcoal }}>
               Bridging Ancient Wisdom <br />& Precise Instrumentation

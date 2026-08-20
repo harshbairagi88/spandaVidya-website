@@ -28,7 +28,7 @@ export default function TechSection() {
     <section 
       id="technology" 
       ref={sectionRef} 
-      className="py-32 px-6 md:px-[8vw] relative overflow-hidden"
+      className="py-8 px-6 md:px-[8vw] relative overflow-hidden"
       style={{ background: T.darkBg }}
     >
       {/* Grid overlay */}
@@ -49,7 +49,7 @@ export default function TechSection() {
           className={`reveal ${visible ? "visible" : ""} inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5`} 
           style={{ color: T.accentWarm }}
         >
-          05 — Infrastructure
+          Infrastructure
         </span>
 
         <h2 

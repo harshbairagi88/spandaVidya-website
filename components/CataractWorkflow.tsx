@@ -86,7 +86,7 @@ const WorkflowStep: React.FC<WorkflowStepProps> = ({ item, idx }) => {
 const CataractWorkflow: React.FC = () => {
   return (
     <div 
-      className="w-full mt-32 pt-24"
+      className="w-full mt-8 pt-12 "
       style={{ borderTop: T.border.light }}
     >
       {/* Workflow Header */}

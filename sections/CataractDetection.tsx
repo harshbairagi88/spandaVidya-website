@@ -91,7 +91,7 @@ const CataractDetection: React.FC = () => {
     <section
       ref={sectionRef}
       id="cataract-detection"
-      className="py-32 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
+      className="py-12 px-4 md:px-[8vw] bg-transparent relative overflow-hidden"
       style={{ borderTop: T.border.light }}
     >
       <div className="relative z-10 max-w-7xl mx-auto">

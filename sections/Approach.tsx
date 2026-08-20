@@ -58,14 +58,14 @@ const Approach: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="approach" className="py-32 px-6 md:px-[8vw] bg-transparent relative overflow-hidden">
+    <section ref={sectionRef} id="approach" className="py-10 px-6 md:px-[8vw] bg-transparent relative overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div ref={headerRef} className="mb-20">
           <span 
             className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5"
             style={{ color: T.accent }}
           >
-            02 — Methodology
+            Methodology
           </span>
           <div className="flex flex-wrap lg:flex-nowrap items-start gap-12 lg:gap-16">
             <h2 

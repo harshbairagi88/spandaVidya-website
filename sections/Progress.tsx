@@ -7,7 +7,7 @@ const steps = progressSteps;
 
 const Progress: React.FC = () => {
   return (
-    <section id="progress" className="py-32 px-6 md:px-[8vw] bg-transparent relative overflow-hidden">
+    <section id="progress" className="py-10 px-6 md:px-[8vw] bg-transparent relative overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20 reveal">
           <div 
@@ -18,9 +18,9 @@ const Progress: React.FC = () => {
               color: T.accent 
             }}
           >
-            05 — Progress
+            Progress
           </div>
-          <h2 className="font-serif text-5xl md:text-6xl font-semibold mb-4" style={{ color: T.charcoal }}>
+          <h2 className="font-serif text-5xl md:text-6xl font-semibold mb-4 " style={{ color: T.charcoal }}>
             Evolution & Roadmap
           </h2>
           <p className="max-w-2xl mx-auto font-light text-base md:text-lg" style={{ color: T.muted }}>
@@ -29,7 +29,7 @@ const Progress: React.FC = () => {
         </div>
         
         <div className="relative">
-          <div className="space-y-16">
+          <div className="space-y-0 ">
             {steps.map((step, idx) => (
               <div 
                 key={idx} 

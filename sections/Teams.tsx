@@ -54,7 +54,7 @@ const Team: React.FC = () => {
   return (
     <section
       id="team"
-      className="relative py-32 px-6 md:px-[8vw] bg-transparent overflow-hidden"
+      className="relative py-12 px-6 md:px-[8vw] bg-transparent overflow-hidden"
     >
       <div className="relative z-10">
         {/* Heading */}
@@ -63,7 +63,7 @@ const Team: React.FC = () => {
             className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5" 
             style={{ color: T.accent }}
           >
-            08 — Our Team
+            Our Team
           </span>
 
           <h2 className="font-serif text-5xl md:text-6xl font-semibold leading-tight mb-6" style={{ color: T.charcoal }}>
