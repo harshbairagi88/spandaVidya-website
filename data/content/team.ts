@@ -21,6 +21,14 @@ export const teamMembers = [
       'PhD scholar in Electrical Engineering at IIT Kanpur focused on AI-driven healthcare systems, pulse diagnostics, machine learning, and computational research for medical technologies.',
   },
   {
+    name: 'Dheeraj Singla',
+    role: 'Co-Founder',
+    image: '/dheeraj.jpeg',
+    description:
+      'Mechanical Engineering graduate with a B.Tech–M.Tech Dual Degree from IIT Kanpur and currently work as a Mechatronics Engineer at Jaguar Land Rover, focusing on system-level engineering and integration',
+  },
+  
+  {
     name: 'Dr. Rakesh Roshan',
     role: 'RF & Sensing Technology Expert',
     image: '/rakesh.jpeg',
