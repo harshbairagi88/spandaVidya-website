@@ -1,40 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { branding, company, social, contact, navigationLinks } from '@/data';
-import { T } from '../theme';
-import Button from './Button';
-import Card from './Card';
+import { branding, company, social, contact, urls } from '@/data';
 import { ROUTES, HASH_ROUTES } from '../router';
 
-const SocialIcon = ({ d, label, href }: { d: string; label: string; href: string }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+interface NavItem {
+  readonly label: string;
+  readonly href?: string;
+  readonly isRoute?: boolean;
+  readonly isExternal?: boolean;
+  readonly isAction?: boolean;
+  readonly actionType?: 'disclaimer';
+  readonly isNonClickable?: boolean;
+  readonly badge?: string;
+}
 
-  return (
-    <a 
-      href={href} 
-      aria-label={label}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md"
-      style={{
-        backgroundColor: isHovered ? T.accent : T.cream,
-        color: isHovered ? T.ivory : T.muted,
-        border: `1px solid ${isHovered ? T.accent : "rgba(26, 24, 20, 0.06)"}`,
-      }}
-    >
-      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        <path d={d} />
-      </svg>
-    </a>
-  );
-};
-
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  // Close modal on escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsDisclaimerOpen(false);
+      }
+    };
+    if (isDisclaimerOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isDisclaimerOpen]);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const emailToCopy = 'contact@spandavidya.ai';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(emailToCopy).then(() => {
+        setEmailCopied(true);
+        setTimeout(() => setEmailCopied(false), 2400);
+      }).catch(() => {
+        window.location.href = `mailto:${emailToCopy}`;
+      });
+    } else {
+      window.location.href = `mailto:${emailToCopy}`;
+    }
+  };
 
   const navigateToSection = (hash: string) => {
     const sectionId = hash.replace('#', '');
@@ -47,274 +67,687 @@ const Footer: React.FC = () => {
       }
     }
   };
-  return (
-    <footer 
-      role="contentinfo"
-      className="py-20 px-6 md:px-[8vw] bg-transparent"
-      style={{ borderTop: T.border.light }}
-    >
-      <div className="max-w-7xl mx-auto">
-        
-        {/* 1. Final CTA Section above the footer (only on Home route) */}
-        {currentPath === ROUTES.HOME && (
-          <Card className="mb-24 p-12 md:p-16 text-center max-w-6xl mx-auto overflow-hidden relative border bg-transparent">
-            {/* Ambient decorative glow inside the card */}
-            <div 
-              className="absolute -top-24 -left-24 w-48 h-48 rounded-full pointer-events-none"
-              style={{
-                backgroundColor: `${T.accent}08`,
-                filter: 'blur(40px)',
-              }}
-            />
-            <div 
-              className="absolute -bottom-24 -right-24 w-48 h-48 rounded-full pointer-events-none"
-              style={{
-                backgroundColor: `${T.accentWarm}06`,
-                filter: 'blur(40px)',
-              }}
-            />
-            
-            <h3 className="font-serif text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ color: T.charcoal }}>
-              Pioneering Ocular & Ayurvedic Signal Intelligence
-            </h3>
-            <p className="text-base md:text-lg mb-8 max-w-2xl mx-auto font-light leading-relaxed" style={{ color: T.muted }}>
-              Join our active clinical research initiative or experience our AI-powered cataract screening assistant today.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button href={`#${HASH_ROUTES.CATARACT_DETECTION}`}>Launch Screening App</Button>
-              <Button href={`#${HASH_ROUTES.CONTACT}`} variant="outline">Collaborate with Us</Button>
-            </div>
-          </Card>
-        )}
 
-        {/* 2. Main Footer Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-16 text-left">
-          {/* Column 1: Brand */}
-          <div className="flex flex-col space-y-5">
-            <div className="flex items-center gap-3">
-              <img 
-                className="h-10 w-auto object-contain" 
-                src={branding.logo} 
-                alt={`${branding.title} Logo`} 
-              />
-              <span 
-                className="font-serif text-2xl font-bold tracking-tight"
-                style={{ color: T.charcoal }}
-              >
-                {branding.title}
+  const handleItemClick = (e: React.MouseEvent, item: NavItem) => {
+    if (item.isNonClickable) {
+      e.preventDefault();
+      return;
+    }
+    if (item.isAction && item.actionType === 'disclaimer') {
+      e.preventDefault();
+      setIsDisclaimerOpen(true);
+      return;
+    }
+    if (item.href && item.href.startsWith('#')) {
+      e.preventDefault();
+      navigateToSection(item.href);
+    }
+  };
+
+  // Structured navigation data mapping
+  const exploreLinks: NavItem[] = [
+    { label: 'AI Health Assistant', href: urls.chatbotUrl || `#${HASH_ROUTES.PHILOSOPHY}`, isExternal: true, badge: 'LIVE' },
+    { label: 'Cataract Detection', href: `#${HASH_ROUTES.CATARACT_DETECTION}` },
+    { label: 'Ayurvedic Consultation', href: `#${HASH_ROUTES.PHILOSOPHY}` },
+    { label: 'How It Works', href: `#${HASH_ROUTES.APPROACH}` },
+    { label: 'Technology', href: `#${HASH_ROUTES.TECHNOLOGY}` },
+    { label: 'About SpandaVidya', href: `#${HASH_ROUTES.MISSION}` },
+  ];
+
+  const platformItems: NavItem[] = [
+    { label: 'Mobile Application', href: `#${HASH_ROUTES.CATARACT_DETECTION}`, badge: 'EXPO' },
+    { label: 'AI Consultation', href: `#${HASH_ROUTES.PHILOSOPHY}`, badge: 'GEMINI' },
+    { label: 'Eye Scan', href: `#${HASH_ROUTES.CATARACT_DETECTION}`, badge: 'VISION' },
+    { label: 'Health Insights', href: `#${HASH_ROUTES.PROGRESS}`, badge: 'ASSIST' },
+    { label: 'AI Diagnostics', isNonClickable: true, badge: 'RESEARCH' },
+  ];
+
+  const informationLinks: NavItem[] = [
+    { label: 'Privacy Policy', href: ROUTES.PRIVACY, isRoute: true },
+    { label: 'Terms of Use', href: ROUTES.TERMS, isRoute: true },
+    { label: 'Medical Disclaimer', isAction: true, actionType: 'disclaimer' },
+    { label: 'Security', href: `#${HASH_ROUTES.TECHNOLOGY}`, badge: 'TLS 1.3' },
+    { label: 'About', href: `#${HASH_ROUTES.MISSION}` },
+  ];
+
+  // Subtle technology / trust pipeline layer
+  const techArchitecture = [
+    {
+      step: '01 / INTAKE',
+      title: 'Edge Capture',
+      detail: 'React Native & Expo anterior segment image acquisition pipeline',
+    },
+    {
+      step: '02 / REASONING',
+      title: 'Ayurvedic Consultation',
+      detail: 'NestJS backend microservices paired with Google Gemini models',
+    },
+    {
+      step: '03 / VISION',
+      title: 'Cataract Detection',
+      detail: 'Deep neural networks for lens opacity and ocular pre-screening',
+    },
+    {
+      step: '04 / INTEGRITY',
+      title: 'Secure Infrastructure',
+      detail: 'PostgreSQL persistence with AWS S3 encrypted asset vault',
+    },
+  ];
+
+  return (
+    <footer
+      role="contentinfo"
+      aria-label="SpandaVidya Global Footer"
+      className="relative w-full bg-[#080706] text-[#F8F5EF] overflow-hidden border-t border-white/[0.08]"
+      style={{
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      }}
+    >
+      {/* Subtle ambient lighting layer */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(184, 147, 90, 0.12), transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto">
+        
+        {/* ============================================================ */}
+        {/* TOP ROW: Large Editorial Contact & Clinical Advisory Notice  */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-white/[0.08]">
+          
+          {/* Top Left: Large Editorial Email */}
+          <div className="lg:col-span-7 p-6 sm:p-8 md:p-12 lg:p-14 lg:border-r border-white/[0.08] flex flex-col justify-between">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                DIRECT INQUIRIES
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B8935A] animate-pulse" />
+              <span className="text-[10px] font-mono tracking-wider text-[#8A8378] uppercase">
+                RESEARCH & COLLABORATION
               </span>
             </div>
-            <p className="text-sm leading-relaxed max-w-xs" style={{ color: T.muted }}>
-              {company.description}
-            </p>
-          </div>
 
-          {/* Column 2: Navigation */}
-          <div className="flex flex-col space-y-4">
-            <h4 
-              className="font-semibold uppercase tracking-widest text-[11px]" 
-              style={{ color: T.charcoal }}
-            >
-              Navigation
-            </h4>
-            <div className="flex flex-col gap-3 text-sm">
-              {navigationLinks.map((link) => (
-                <a 
-                  key={link.href}
-                  href={currentPath === ROUTES.HOME ? link.href : `${ROUTES.HOME}${link.href}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateToSection(link.href);
-                  }}
-                  className="hover:opacity-100 transition-opacity w-fit" 
-                  style={{ color: T.muted, opacity: 0.8 }}
+            <div className="mt-2 mb-4">
+              <a
+                href="mailto:contact@spandavidya.ai"
+                onClick={handleCopyEmail}
+                className="group inline-flex items-center gap-3 text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-light tracking-tight text-[#F8F5EF] hover:text-[#D4B896] transition-colors duration-200"
+                title="Click to copy email or compose message"
+              >
+                <span className="break-all font-serif">contact@spandavidya.ai</span>
+                <span
+                  className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/10 group-hover:border-[#B8935A] group-hover:bg-[#B8935A]/10 text-white/60 group-hover:text-[#D4B896] transition-all duration-200 transform group-hover:translate-x-1 group-hover:-translate-y-0.5 shrink-0"
+                  aria-hidden="true"
                 >
-                  {link.label}
-                </a>
-              ))}
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
+              </a>
+
+              {/* Copy confirmation feedback */}
+              <div className="h-5 mt-1">
+                {emailCopied && (
+                  <span className="text-[11px] font-mono text-[#D4B896] tracking-wider uppercase transition-opacity">
+                    ✓ Email copied to clipboard
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-[11px] font-mono tracking-wider text-[#8A8378]">
+              <span>CAMPUS: IIT KANPUR, INDIA</span>
+              <span className="hidden sm:inline text-white/20">•</span>
+              <span>EST. 2024</span>
+              <span className="hidden sm:inline text-white/20">•</span>
+              <span>AYURVEDIC SIGNAL INTELLIGENCE</span>
             </div>
           </div>
 
-          {/* Column 3: Products */}
-          <div className="flex flex-col space-y-4">
-            <h4 
-              className="font-semibold uppercase tracking-widest text-[11px]" 
-              style={{ color: T.charcoal }}
-            >
-              Platform
-            </h4>
-            <div className="flex flex-col gap-3 text-sm">
-              <a 
+          {/* Top Right: Monospaced Clinical Advisory Box */}
+          <div className="lg:col-span-5 p-6 sm:p-8 md:p-12 lg:p-14 bg-white/[0.01] flex flex-col justify-between border-t lg:border-t-0 border-white/[0.08]">
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#B8935A] bg-white/[0.03] border border-white/10 rounded-sm">
+                  CLINICAL NOTICE
+                </span>
+                <span className="text-[10px] font-mono tracking-wider text-[#8A8378]">
+                  REF: SV-MED-2026
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs font-mono leading-relaxed text-[#8A8378] uppercase tracking-wider">
+                SPANDAVIDYA IS AN ASSISTIVE PRE-SCREENING & INTEGRATIVE WELLNESS TECHNOLOGY PLATFORM. IT DOES NOT PROVIDE FORMAL MEDICAL DIAGNOSES OR REPLACE EMERGENCY SERVICES. IN AN ACUTE MEDICAL EMERGENCY, CONTACT LOCAL EMERGENCY SERVICES (112) IMMEDIATELY.
+              </p>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setIsDisclaimerOpen(true)}
+                className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#D4B896] hover:text-white underline underline-offset-4 transition-colors"
+              >
+                VIEW FULL MEDICAL ADVISORY [→]
+              </button>
+              <span className="text-[10px] font-mono tracking-widest text-[#8A8378]">
+                SECURE PLATFORM
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* MAIN COLUMNS GRID: 5 Dedicated Sections with Thin Borders    */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-b border-white/[0.08]">
+          
+          {/* ------------------------------------------------------------ */}
+          {/* SECTION 1 — BRAND                                           */}
+          {/* ------------------------------------------------------------ */}
+          <div className="p-6 sm:p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/[0.08] flex flex-col justify-between">
+            <div>
+              {/* Section badge */}
+              <div className="mb-6">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                  SPANDAVIDYA
+                </span>
+              </div>
+
+              {/* Logo and Name */}
+              <div className="flex items-center gap-3 mb-6">
+                <img
+                  src={branding.logo}
+                  alt={`${branding.title} Logo`}
+                  className="h-8 w-auto object-contain brightness-110"
+                  loading="lazy"
+                />
+                <span className="font-serif text-2xl font-light tracking-wide text-[#F8F5EF]">
+                  {branding.title}
+                </span>
+              </div>
+
+              {/* Main Brand Statement */}
+              <h2 className="font-serif text-lg sm:text-xl font-normal tracking-tight text-[#F8F5EF] leading-snug uppercase mb-4">
+                AI-POWERED HEALTHCARE.
+                <br />
+                <span className="text-[#D4B896]">ROOTED IN CARE.</span>
+              </h2>
+
+              {/* Concise Description */}
+              <p className="text-xs sm:text-[13px] leading-relaxed text-[#9E988E] mb-6 font-normal">
+                SpandaVidya brings together artificial intelligence, computer vision, and Ayurvedic knowledge to create accessible digital healthcare experiences.
+              </p>
+            </div>
+
+            {/* Technology Statement */}
+            <div className="pt-4 border-t border-white/[0.06]">
+              <div className="inline-block text-[10px] font-mono tracking-[0.2em] text-[#D4B896] uppercase bg-white/[0.02] border border-white/5 px-2.5 py-1.5 rounded-sm">
+                AI • COMPUTER VISION • AYURVEDA
+              </div>
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------------ */}
+          {/* SECTION 2 — EXPLORE                                         */}
+          {/* ------------------------------------------------------------ */}
+          <div className="p-6 sm:p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/[0.08] flex flex-col justify-between">
+            <div>
+              <div className="mb-6">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                  EXPLORE
+                </span>
+              </div>
+
+              <ul className="space-y-3.5" role="list">
+                {exploreLinks.map((item) => (
+                  <li key={item.label}>
+                    {item.isExternal ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          {item.badge && (
+                            <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-[#B8935A]/15 text-[#D4B896] border border-[#B8935A]/30">
+                              {item.badge}
+                            </span>
+                          )}
+                          <svg
+                            className="w-3 h-3 text-[#8A8378] group-hover:text-[#D4B896] transition-colors"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            aria-hidden="true"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </span>
+                      </a>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={(e) => handleItemClick(e, item)}
+                        className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#D4B896] font-mono text-xs">
+                          →
+                        </span>
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[10px] font-mono tracking-widest text-[#8A8378] uppercase">
+              INDEX • SECTIONS 01-06
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------------ */}
+          {/* SECTION 3 — PLATFORM                                        */}
+          {/* ------------------------------------------------------------ */}
+          <div className="p-6 sm:p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/[0.08] flex flex-col justify-between">
+            <div>
+              <div className="mb-6">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                  PLATFORM
+                </span>
+              </div>
+
+              <ul className="space-y-3.5" role="list">
+                {platformItems.map((item) => (
+                  <li key={item.label}>
+                    {item.isNonClickable ? (
+                      <div className="flex items-center justify-between text-xs sm:text-[13px] text-[#6E695F] py-0.5 select-none">
+                        <span>{item.label}</span>
+                        {item.badge && (
+                          <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-white/[0.03] text-[#8A8378] border border-white/5">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={(e) => handleItemClick(e, item)}
+                        className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-[#D4B896] border border-white/10 group-hover:border-[#B8935A]/50">
+                            {item.badge}
+                          </span>
+                        )}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[10px] font-mono tracking-widest text-[#8A8378] uppercase">
+              STATUS • MULTI-MODAL PIPELINE
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------------ */}
+          {/* SECTION 4 — TRUST & INFORMATION                             */}
+          {/* ------------------------------------------------------------ */}
+          <div className="p-6 sm:p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/[0.08] flex flex-col justify-between">
+            <div>
+              <div className="mb-6">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                  INFORMATION
+                </span>
+              </div>
+
+              <ul className="space-y-3.5" role="list">
+                {informationLinks.map((item) => (
+                  <li key={item.label}>
+                    {item.isRoute ? (
+                      <Link
+                        to={item.href || '/'}
+                        className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#D4B896] font-mono text-xs">
+                          →
+                        </span>
+                      </Link>
+                    ) : item.isAction ? (
+                      <button
+                        type="button"
+                        onClick={(e) => handleItemClick(e, item)}
+                        className="group w-full flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5 text-left"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        <span className="text-[9px] font-mono px-1 py-0.5 rounded bg-white/[0.04] text-[#B8935A] border border-white/10">
+                          READ
+                        </span>
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={(e) => handleItemClick(e, item)}
+                        className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
+                      >
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-[#D4B896] border border-white/10">
+                            {item.badge}
+                          </span>
+                        )}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[10px] font-mono tracking-widest text-[#8A8378] uppercase">
+              ETHICS • CLINICAL STANDARDS
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------------ */}
+          {/* SECTION 5 — CONNECT & CTA                                   */}
+          {/* ------------------------------------------------------------ */}
+          <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01]">
+            <div>
+              <div className="mb-6">
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm">
+                  CONNECT
+                </span>
+              </div>
+
+              {/* Direct emails */}
+              <div className="space-y-3 mb-6">
+                <div>
+                  <span className="block text-[10px] font-mono tracking-widest text-[#8A8378] uppercase mb-1">
+                    PRIMARY INQUIRY
+                  </span>
+                  <a
+                    href="mailto:contact@spandavidya.ai"
+                    className="text-xs sm:text-[13px] text-[#F8F5EF] hover:text-[#D4B896] transition-colors font-mono break-all"
+                  >
+                    contact@spandavidya.ai
+                  </a>
+                </div>
+
+                {contact.supportEmail && (
+                  <div>
+                    <span className="block text-[10px] font-mono tracking-widest text-[#8A8378] uppercase mb-1">
+                      SUPPORT & ESCALATIONS
+                    </span>
+                    <a
+                      href={`mailto:${contact.supportEmail}`}
+                      className="text-xs text-[#A19C91] hover:text-[#D4B896] transition-colors font-mono break-all"
+                    >
+                      {contact.supportEmail}
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Verified Social Links */}
+              <div className="mb-6">
+                <span className="block text-[10px] font-mono tracking-widest text-[#8A8378] uppercase mb-2">
+                  DISPATCH CHANNELS
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {social.github && (
+                    <a
+                      href={social.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-mono text-[#A19C91] hover:text-[#F8F5EF] bg-white/[0.03] border border-white/10 hover:border-[#B8935A] hover:bg-white/[0.06] transition-all"
+                      aria-label="SpandaVidya on GitHub"
+                    >
+                      <span>GITHUB</span>
+                      <span className="text-[#D4B896] text-[10px]">↗</span>
+                    </a>
+                  )}
+                  {social.linkedin && (
+                    <a
+                      href={social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-mono text-[#A19C91] hover:text-[#F8F5EF] bg-white/[0.03] border border-white/10 hover:border-[#B8935A] hover:bg-white/[0.06] transition-all"
+                      aria-label="SpandaVidya on LinkedIn"
+                    >
+                      <span>LINKEDIN</span>
+                      <span className="text-[#D4B896] text-[10px]">↗</span>
+                    </a>
+                  )}
+                  {social.twitter && (
+                    <a
+                      href={social.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-mono text-[#A19C91] hover:text-[#F8F5EF] bg-white/[0.03] border border-white/10 hover:border-[#B8935A] hover:bg-white/[0.06] transition-all"
+                      aria-label="SpandaVidya on X"
+                    >
+                      <span>X / TWITTER</span>
+                      <span className="text-[#D4B896] text-[10px]">↗</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Compact CTA block */}
+            <div className="pt-6 border-t border-white/[0.08]">
+              <p className="text-[11px] font-mono tracking-wider text-[#D4B896] uppercase mb-3">
+                BUILD THE FUTURE OF DIGITAL HEALTH.
+              </p>
+              <a
                 href={`#${HASH_ROUTES.CATARACT_DETECTION}`}
                 onClick={(e) => {
                   e.preventDefault();
                   navigateToSection(`#${HASH_ROUTES.CATARACT_DETECTION}`);
                 }}
-                className="hover:opacity-100 transition-opacity w-fit" 
-                style={{ color: T.muted, opacity: 0.8 }}
+                className="group w-full inline-flex items-center justify-between px-4 py-3 text-xs font-mono tracking-widest uppercase text-[#080706] bg-[#D4B896] hover:bg-[#F8F5EF] rounded-sm transition-all duration-200 font-medium active:scale-[0.99] shadow-sm"
               >
-                AI Cataract Detection
+                <span>EXPLORE SPANDAVIDYA</span>
+                <span className="transform group-hover:translate-x-1 transition-transform duration-200">
+                  →
+                </span>
               </a>
-              <a 
-                href={`#${HASH_ROUTES.PHILOSOPHY}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateToSection(`#${HASH_ROUTES.PHILOSOPHY}`);
-                }}
-                className="hover:opacity-100 transition-opacity w-fit" 
-                style={{ color: T.muted, opacity: 0.8 }}
-              >
-                AI Naadi Consultation
-              </a>
-              <a 
-                href={`#${HASH_ROUTES.TECHNOLOGY}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateToSection(`#${HASH_ROUTES.TECHNOLOGY}`);
-                }}
-                className="hover:opacity-100 transition-opacity w-fit" 
-                style={{ color: T.muted, opacity: 0.8 }}
-              >
-                Research Architecture
-              </a>
-            </div>
-          </div>
-
-          {/* Column 4: Contact */}
-          <div className="flex flex-col space-y-4">
-            <h4 
-              className="font-semibold uppercase tracking-widest text-[11px]" 
-              style={{ color: T.charcoal }}
-            >
-              Inquiries
-            </h4>
-            <div className="flex flex-col gap-4 text-sm" style={{ color: T.muted }}>
-              <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider mb-1" style={{ color: T.charcoal }}>Official Email</p>
-                <a 
-                  href={`mailto:${contact.officialEmail}`} 
-                  className="hover:opacity-100 transition-opacity break-all"
-                  style={{ color: T.accent, opacity: 0.9 }}
-                >
-                  {contact.officialEmail}
-                </a>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider mb-1" style={{ color: T.charcoal }}>Support Email</p>
-                <a 
-                  href={`mailto:${contact.supportEmail}`} 
-                  className="hover:opacity-100 transition-opacity break-all"
-                  style={{ color: T.accent, opacity: 0.9 }}
-                >
-                  {contact.supportEmail}
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 5: Stay Connected & Socials */}
-          <div className="flex flex-col space-y-5">
-            <h4 
-              className="font-semibold uppercase tracking-widest text-[11px]" 
-              style={{ color: T.charcoal }}
-            >
-              Stay Connected
-            </h4>
-            <p className="text-sm leading-relaxed" style={{ color: T.muted }}>
-              Follow our research initiatives and clinical updates.
-            </p>
-            <div className="flex gap-3">
-              <SocialIcon 
-                label="Instagram"
-                href={social.instagram}
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" 
-              />
-              <SocialIcon 
-                label="Twitter"
-                href={social.twitter}
-                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" 
-              />
-              <SocialIcon 
-                label="LinkedIn"
-                href={social.linkedin}
-                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" 
-              />
             </div>
           </div>
         </div>
 
-        {/* 3. Quick Statistics / Trust Badges */}
-        <div 
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-10 border-t border-b mb-16 text-center md:text-left"
-          style={{ borderColor: "rgba(26, 24, 20, 0.08)" }}
-        >
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
-              <span className="w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: T.accent }} />
+        {/* ============================================================ */}
+        {/* SUBTLE TECHNOLOGY & TRUST ARCHITECTURE LAYER                 */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-white/[0.08] bg-white/[0.01]">
+          {techArchitecture.map((item, idx) => (
+            <div
+              key={item.step}
+              className={`p-6 sm:p-7 border-b sm:border-b-0 ${
+                idx !== techArchitecture.length - 1 ? 'lg:border-r border-white/[0.08]' : ''
+              } ${idx % 2 === 0 ? 'sm:border-r border-white/[0.08]' : ''}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono tracking-[0.2em] text-[#B8935A] uppercase">
+                  {item.step}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+              </div>
+              <h4 className="text-xs font-mono font-semibold tracking-wider text-[#F8F5EF] uppercase mb-1.5">
+                {item.title}
+              </h4>
+              <p className="text-[11px] font-mono leading-relaxed text-[#8A8378]">
+                {item.detail}
+              </p>
             </div>
-            <div>
-              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>AI Powered</p>
-              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Gemini & Custom Vision</p>
-            </div>
-          </div>
+          ))}
+        </div>
+
+        {/* ============================================================ */}
+        {/* BOTTOM AREA: Legal Bar & Monospaced Signatures               */}
+        {/* ============================================================ */}
+        <div className="p-6 sm:p-8 lg:px-10 lg:py-8 flex flex-col lg:flex-row items-center justify-between gap-6 text-[11px] font-mono tracking-wider text-[#8A8378]">
           
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
-              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: T.sage }} />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Privacy First</p>
-              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>TLS 1.3 & AWS S3 Encrypted</p>
-            </div>
+          {/* Left: Copyright */}
+          <div className="text-center lg:text-left">
+            <span className="text-[#A19C91]">
+              © 2026 SPANDAVIDYA. ALL RIGHTS RESERVED.
+            </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
-              <span className="w-2.5 h-2.5 rounded-full animate-bounce" style={{ backgroundColor: T.accentWarm }} />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Research Driven</p>
-              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Ayurvedic Pulse Mapping</p>
-            </div>
+          {/* Center: Core Pillars */}
+          <div className="text-center text-[10px] text-[#8A8378] tracking-[0.16em] uppercase">
+            AI-POWERED HEALTHCARE • AYURVEDIC INTELLIGENCE • COMPUTER VISION
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 justify-center lg:justify-start">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border transition-colors duration-300" style={{ backgroundColor: T.cream, borderColor: "rgba(26, 24, 20, 0.06)" }}>
-              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: T.sagePale }} />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase font-bold tracking-wider" style={{ color: T.charcoal }}>Made in India</p>
-              <p className="text-[10px] leading-snug" style={{ color: T.muted }}>Engineered at IIT Kanpur</p>
-            </div>
-          </div>
-        </div>
-
-        {/* 4. Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6" style={{ borderTop: T.border.light }}>
-          <div className="text-[11px] font-medium tracking-wide uppercase text-center md:text-left" style={{ color: T.muted }}>
-            &copy; {new Date().getFullYear()} {company.author} • All Rights Reserved
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-            <Link 
+          {/* Right: Quick Links */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[11px]">
+            <Link
               to={ROUTES.PRIVACY}
-              className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
-              style={{ color: T.muted, opacity: 0.8 }}
+              className="text-[#8A8378] hover:text-[#D4B896] transition-colors uppercase tracking-wider"
             >
-              Privacy Policy
+              PRIVACY
             </Link>
-            <Link 
+            <span className="text-white/20" aria-hidden="true">•</span>
+            <Link
               to={ROUTES.TERMS}
-              className="hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-[0.2em]" 
-              style={{ color: T.muted, opacity: 0.8 }}
+              className="text-[#8A8378] hover:text-[#D4B896] transition-colors uppercase tracking-wider"
             >
-              Terms & Conditions
+              TERMS
             </Link>
-          </div>
-          <div className="text-[9px] font-mono tracking-wider text-center md:text-right" style={{ color: T.muted, opacity: 0.7 }}>
-            Secure Server-Side AI • TLS 1.3 Encryption
+            <span className="text-white/20" aria-hidden="true">•</span>
+            <button
+              type="button"
+              onClick={() => setIsDisclaimerOpen(true)}
+              className="text-[#8A8378] hover:text-[#D4B896] transition-colors uppercase tracking-wider cursor-pointer"
+            >
+              MEDICAL DISCLAIMER
+            </button>
           </div>
         </div>
+
+        {/* Technical Footer Signature Strip */}
+        <div className="py-3 px-6 lg:px-10 bg-black/40 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] font-mono tracking-[0.25em] text-[#6E695F] uppercase">
+          <div>
+            BUILT WITH INTELLIGENCE. DESIGNED FOR CARE.
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5C6E52]" />
+            <span>NODE: IIT KANPUR // DISTRIBUTED HEALTH-TECH</span>
+          </div>
+        </div>
+
       </div>
+
+      {/* ============================================================ */}
+      {/* ACCESSIBLE MEDICAL DISCLAIMER MODAL                          */}
+      {/* ============================================================ */}
+      {isDisclaimerOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="disclaimer-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm transition-opacity animate-fadeIn"
+          onClick={() => setIsDisclaimerOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl bg-[#0E0D0A] border border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl text-[#F8F5EF] max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+            style={{ borderRadius: '2px' }}
+          >
+            {/* Modal Header */}
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10 mb-6">
+              <div>
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm mb-2">
+                  REGULATORY & CLINICAL NOTICE
+                </span>
+                <h3 id="disclaimer-modal-title" className="font-serif text-xl sm:text-2xl font-light text-[#F8F5EF]">
+                  SpandaVidya Medical & Research Disclaimer
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsDisclaimerOpen(false)}
+                className="w-8 h-8 flex items-center justify-center rounded border border-white/15 text-[#A19C91] hover:text-white hover:border-[#D4B896] transition-colors"
+                aria-label="Close medical disclaimer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="space-y-4 text-xs sm:text-[13px] leading-relaxed text-[#9E988E] font-normal">
+              <p>
+                <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
+                  1. Assistive Pre-Screening Only
+                </strong>
+                SpandaVidya is an investigational health-technology initiative that combines computer vision and Ayurvedic signal intelligence. The assessments provided by the platform—including cataract risk classification and Ayurvedic dosha pulse analysis—are for informational, educational, and pre-screening purposes only.
+              </p>
+
+              <p>
+                <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
+                  2. Not a Diagnostic Device
+                </strong>
+                SpandaVidya does not deliver formal medical diagnoses, therapeutic prescriptions, or definitive disease management recommendations. It is designed to augment and assist, not replace, clinical examination by board-certified ophthalmologists, licensed Ayurvedic Vaidyas, or general practitioners.
+              </p>
+
+              <p>
+                <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
+                  3. Emergency Situations
+                </strong>
+                If you are experiencing acute eye trauma, sudden vision loss, severe pain, or any medical emergency, do not wait for automated digital assessments. Seek immediate attention at a hospital emergency room or contact emergency services (112 in India / 911 in the US).
+              </p>
+
+              <p>
+                <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
+                  4. Privacy & Data Architecture
+                </strong>
+                All image uploads and user queries are routed via secure TLS 1.3 encrypted endpoints and processed with strict access governance. We prioritize user privacy and objective algorithmic transparency.
+              </p>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+              <span className="text-[10px] font-mono text-[#8A8378] uppercase">
+                DOCUMENT CODE: SV-LEGAL-MED-01
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsDisclaimerOpen(false)}
+                className="px-4 py-2 text-xs font-mono uppercase tracking-widest text-[#080706] bg-[#D4B896] hover:bg-[#F8F5EF] rounded-sm transition-colors font-medium"
+              >
+                ACKNOWLEDGE & CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };
