@@ -44,7 +44,7 @@ Our flagship AI application allows users to capture and upload ocular images to 
 
 ## Features
 
-- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, Approach, Progress, and Philosophy.
+- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, Approach, and Philosophy.
 - **Scroll Animations**: Utilizes custom hooks (`useScrollReveal`, `useCountUp`) and GSAP for engaging scroll-based visibility and number counter animations.
 - **Responsive Components**: Includes reusable UI components like Buttons, Cards, Navbar, and Footer.
 
@@ -108,7 +108,6 @@ project-root/
 │   ├── Hero.tsx
 │   ├── Mission.tsx
 │   ├── PhilosophySection.tsx
-│   ├── Progress.tsx
 │   ├── Teams.tsx
 │   ├── TechSection.tsx
 │   └── CataractDetection.tsx

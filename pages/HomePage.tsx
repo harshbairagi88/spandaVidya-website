@@ -4,7 +4,6 @@ import Hero from '../sections/Hero';
 import Challenge from '../sections/Challenge';
 import CataractDetection from '../sections/CataractDetection';
 import Approach from '../sections/Approach';
-import Progress from '../sections/Progress';
 import Differentiation from '../sections/Differentiation';
 import Mission from '../sections/Mission';
 import PhilosophySection from '../sections/PhilosophySection';
@@ -29,7 +28,6 @@ export const HomePage: React.FC = () => {
       <Challenge />
       <CataractDetection />
       <Approach />
-      <Progress />
       <Differentiation />
       <Mission />
       <PhilosophySection />

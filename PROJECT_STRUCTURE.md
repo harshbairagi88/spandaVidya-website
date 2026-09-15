@@ -61,7 +61,6 @@
 ./sections/Mission.tsx
 ./sections/PhilosophySection.tsx
 ./sections/PrivacyPolicy.tsx
-./sections/Progress.tsx
 ./sections/Teams.tsx
 ./sections/TechSection.tsx
 ./sections/TermsAndConditions.tsx

@@ -4,6 +4,6 @@ export * from './progress';
 export * from './philosophy';
 export * from './differentiation';
 export * from './cataract-detection';
+export * from './applications';
 export * from './privacy';
 export * from './terms';
-

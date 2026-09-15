@@ -27,7 +27,7 @@ export const teamMembers = [
     description:
       'Mechanical Engineering graduate with a B.Tech–M.Tech Dual Degree from IIT Kanpur and currently work as a Mechatronics Engineer at Jaguar Land Rover, focusing on system-level engineering and integration',
   },
-  
+
   {
     name: 'Dr. Rakesh Roshan',
     role: 'RF & Sensing Technology Expert',
@@ -42,13 +42,13 @@ export const teamMembers = [
     description:
       'Experienced Senior Leader handling operations, partnerships, and strategic execution for organizational growth and institutional coordination.',
   },
-  
+
   {
     name: 'Sameer Khan',
     role: 'Full Stack Developer',
     image: '/sameer.jpg',
     description:
-      'Full Stack Developer contributing to the SpandaVidya AI application and website. Focused on building scalable healthcare platforms, AI-powered diagnostic systems, React, React Native, Node.js, and modern cloud-based solutions that combine artificial intelligence with Ayurveda.',
+      'Full Stack Developer building production-ready web applications — from designing APIs and managing databases to crafting responsive, interactive frontends. Built real-time collaborative platforms, integrated AI-driven features, and shipped secure, optimized systems',
   },
   {
     name: 'Harsh Bairagi',
