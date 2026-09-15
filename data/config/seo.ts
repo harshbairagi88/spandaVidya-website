@@ -4,21 +4,21 @@ export interface SEOMetadata {
 }
 
 export const HOME_SEO = {
-  title: "spandaVidya | AI-Powered Ayurvedic Pulse Diagnosis & Digital Naadi Pariksha",
-  description: "spandaVidya revolutionizes traditional Ayurvedic pulse diagnostics (Naadi Pariksha) with AI-powered signal intelligence. Get accurate, clinical-grade health assessments using advanced PPG sensors and machine learning for personalized Ayurvedic wellness.",
+  title: 'SpandaVidya AI | Healthcare AI & Signal Intelligence',
+  description: 'SpandaVidya AI develops healthcare technology combining AI, computer vision, signal intelligence and digital Naadi research for eye health and infant experiences.',
 } as const satisfies SEOMetadata;
 
 export const PRIVACY_SEO = {
-  title: "Privacy Policy & Security | SpandaVidya",
-  description: "Privacy Policy and Security guidelines for SpandaVidya AI Cataract Detection. Understand our data safety, authentication, and clinical disclosures.",
+  title: 'Privacy Policy | SpandaVidya AI',
+  description: 'Read the SpandaVidya AI privacy policy for this healthcare technology platform and its digital products.',
 } as const satisfies SEOMetadata;
 
 export const TERMS_SEO = {
-  title: "Terms & Conditions | SpandaVidya",
-  description: "Terms and Conditions of service for the SpandaVidya AI Cataract Detection and Consultation platform.",
+  title: 'Terms and Conditions | SpandaVidya AI',
+  description: 'Read the terms and conditions for SpandaVidya AI healthcare technology products and research experiences.',
 } as const satisfies SEOMetadata;
 
 export const NOT_FOUND_SEO = {
-  title: "404 Page Not Found | SpandaVidya",
-  description: "The page you are looking for does not exist or has been moved.",
+  title: 'Page Not Found | SpandaVidya AI',
+  description: 'The page you are looking for does not exist or has moved.',
 } as const satisfies SEOMetadata;

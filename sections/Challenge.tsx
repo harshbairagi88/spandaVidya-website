@@ -61,12 +61,12 @@ const Challenge: React.FC = () => {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} className="py-6 px-6 md:px-[8vw] bg-red-500 overflow-hidden">
+    <section ref={sectionRef} id="approach" className="py-12 px-6 md:px-[8vw] bg-red-500 overflow-hidden">
       <div className="grid md:grid-cols-2 gap-20 items-center">
         <article ref={contentRef}>
           <header className="mb-10">
-            <span 
-              className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5" 
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5"
               style={{ color: T.accent }}
             >
               Challenge

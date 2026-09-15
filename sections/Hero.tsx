@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
       id="home"
       className="relative min-h-screen flex items-center px-6 md:px-[8vw] py-2 overflow-hidden bg-transparent"
     >
-      <div className="relative max-w-5xl">
+      <div className="relative mt-20 max-w-5xl">
         <div
           ref={badgeRef}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest mb-8"
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
 
         <h1
           ref={headingRef}
-          className="font-serif text-6xl md:text-8xl font-bold leading-[1.05] mb-8"
+          className="font-serif text-6xl md:text-8xl font-bold leading-[1.05]"
           style={{ color: T.charcoal }}
         >
           Digitizing <span style={{ color: T.accent }}>SpandaVidya</span> <br />
@@ -87,11 +87,11 @@ const Hero: React.FC = () => {
           className="text-xl md:text-2xl max-w-2xl mb-12 leading-relaxed font-light"
           style={{ color: T.muted }}
         >
-          We leverage high-fidelity sensing and proprietary AI to capture Ayurvedic pulse signals, delivering objective, clinical-grade functional insights for integrative medicine.
+          We develop healthcare technology that combines AI, computer vision, signal intelligence, and digital Naadi research across eye health, infant experiences, and physiological monitoring.
         </p>
 
         <div ref={ctaRef} className="flex flex-wrap gap-5">
-          <Button href="#cataract-detection" className="shadow-xl">
+          <Button href="#applications" className="shadow-xl">
             OUR SERVICES →
           </Button>
           <Button

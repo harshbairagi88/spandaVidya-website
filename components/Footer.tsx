@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
   // Structured navigation data mapping
   const exploreLinks: NavItem[] = [
     { label: 'AI Health Assistant', href: urls.chatbotUrl || `#${HASH_ROUTES.PHILOSOPHY}`, isExternal: true, badge: 'LIVE' },
-    { label: 'Cataract Detection', href: `#${HASH_ROUTES.CATARACT_DETECTION}` },
+    { label: 'Cataract AI', href: `#${HASH_ROUTES.CATARACT_DETECTION}` },
     { label: 'Ayurvedic Consultation', href: `#${HASH_ROUTES.PHILOSOPHY}` },
     { label: 'How It Works', href: `#${HASH_ROUTES.APPROACH}` },
     { label: 'Technology', href: `#${HASH_ROUTES.TECHNOLOGY}` },
@@ -99,7 +99,7 @@ export const Footer: React.FC = () => {
     { label: 'AI Consultation', href: `#${HASH_ROUTES.PHILOSOPHY}`, badge: 'GEMINI' },
     { label: 'Eye Scan', href: `#${HASH_ROUTES.CATARACT_DETECTION}`, badge: 'VISION' },
     { label: 'Health Insights', href: `#${HASH_ROUTES.PROGRESS}`, badge: 'ASSIST' },
-    { label: 'AI Diagnostics', isNonClickable: true, badge: 'RESEARCH' },
+    { label: 'Health Technology Research', isNonClickable: true, badge: 'R&D' },
   ];
 
   const informationLinks: NavItem[] = [
@@ -276,6 +276,9 @@ export const Footer: React.FC = () => {
                 <img
                   src={branding.logo}
                   alt={`${branding.title} Logo`}
+                  width={612}
+                  height={408}
+                  decoding="async"
                   className="h-8 w-auto object-contain brightness-110"
                   loading="lazy"
                 />

@@ -4,6 +4,6 @@ export interface WebsiteUrls {
 }
 
 export const urls = {
-  website: "https://spandavidya.ai",
+  website: "https://www.spandavidyaai.com",
   chatbotUrl: "https://naadi-raksha-liart.vercel.app/"
 } as const satisfies WebsiteUrls;

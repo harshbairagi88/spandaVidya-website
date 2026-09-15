@@ -6,8 +6,10 @@ export const ROUTES = {
 
 export const HASH_ROUTES = {
   HOME: "home",
-  APPLICATIONSECTION: "ApplicationsSection",
-  PROGRESS: "progress",
+  APPLICATIONS: "applications",
+  CATARACT_DETECTION: "applications",
+  APPROACH: "approach",
+  PROGRESS: "technology",
   MISSION: "mission",
   PHILOSOPHY: "philosophy",
   TECHNOLOGY: "technology",

@@ -2,7 +2,8 @@ import { NavLink } from '@/types';
 
 export const navigationLinks = [
   { label: 'Home', href: '#home' },
-  { label: 'Approach', href: '#technology' },
+  { label: 'Approach', href: '#approach' },
+  { label: 'Applications', href: '#applications' },
   { label: 'Mission', href: '#mission' },
   { label: 'Contact', href: '#contact' },
   { label: 'Team', href: '#team' }

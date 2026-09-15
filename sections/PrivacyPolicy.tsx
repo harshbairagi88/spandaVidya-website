@@ -26,7 +26,7 @@ const PrivacyPolicy: React.FC = () => {
           </button>
           
           <div className="flex items-center gap-2.5">
-            <img className="h-8 w-auto object-contain" src={branding.logo} alt="Logo" />
+            <img className="h-8 w-auto object-contain" src={branding.logo} alt="SpandaVidya AI" width={612} height={408} decoding="async" />
             <span className="font-serif text-lg font-bold" style={{ color: T.charcoal }}>{branding.title}</span>
           </div>
         </div>

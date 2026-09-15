@@ -9,7 +9,9 @@ export const MainLayout: React.FC = () => {
       <header>
         <Navbar />
       </header>
-      <Outlet />
+      <main id="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

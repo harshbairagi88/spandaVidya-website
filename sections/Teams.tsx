@@ -29,7 +29,11 @@ const TeamCard: React.FC<{ member: TeamMember }> = ({ member }) => {
       <div className="overflow-hidden bg-gray-100">
         <img
           src={member.image}
-          alt={member.name}
+          alt={`${member.name}, ${member.role} at SpandaVidya AI`}
+          width={member.imageWidth}
+          height={member.imageHeight}
+          loading="lazy"
+          decoding="async"
           className="w-full h-[320px] object-cover object-top transition-transform duration-700"
           style={{
             transform: isHovered ? "scale(1.05)" : "scale(1)",

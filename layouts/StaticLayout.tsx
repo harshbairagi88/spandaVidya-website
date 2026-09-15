@@ -5,7 +5,9 @@ import Footer from '../components/Footer';
 export const StaticLayout: React.FC = () => {
   return (
     <>
-      <Outlet />
+      <main id="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

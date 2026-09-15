@@ -327,7 +327,7 @@ export const ApplicationsSection: React.FC = () => {
           ref={tabsRef}
           role="tablist"
           aria-label="SpandaVidya Applications"
-          className="mb-14 sm:mb-16 grid grid-cols-1 md:grid-cols-3 gap-3 p-2 rounded-2xl border"
+          className="mb-2 sm:mb-2 grid grid-cols-1 md:grid-cols-3 gap-3 p-2 rounded-2xl border"
           style={{
             backgroundColor: T.cream,
             borderColor: 'rgba(140, 107, 62, 0.16)',

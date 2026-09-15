@@ -78,7 +78,10 @@ const Navbar: React.FC = () => {
           <a href="#home" className="group flex items-center" aria-label="SpandaVidya Home">
             <img
               src={branding.logo}
-              alt="SpandaVidya Logo"
+              alt="SpandaVidya AI"
+              width={612}
+              height={408}
+              decoding="async"
               className="h-14 md:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </a>
@@ -100,7 +103,7 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <a
-              href="#cataract-detection"
+              href="#applications"
               className="group ml-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 backgroundColor: T.accent,
@@ -148,7 +151,7 @@ const Navbar: React.FC = () => {
               ))}
             </div>
             <a
-              href="#cataract-detection"
+              href="#applications"
               className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-center text-sm font-semibold text-white transition-all duration-300 hover:opacity-95"
               style={{
                 backgroundColor: T.accent,

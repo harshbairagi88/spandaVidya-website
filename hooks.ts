@@ -62,7 +62,7 @@ export function useSEO({ title, description, path }: { title: string; descriptio
       }
     };
 
-    const fullUrl = `https://spandavidya.ai${path === '/' ? '' : path}`;
+    const fullUrl = `https://www.spandavidyaai.com${path === '/' ? '/' : path}`;
 
     // 2. Standard Meta Tags
     setMeta('meta[name="title"]', 'content', title);

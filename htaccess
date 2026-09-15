@@ -15,9 +15,9 @@
   # RewriteCond %{HTTP_HOST} !^www\. [NC]
   # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   
-  # www to non-www (RECOMMENDED):
-  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+  # Canonical host: www.spandavidyaai.com
+  RewriteCond %{HTTP_HOST} !^www\.spandavidyaai\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.spandavidyaai.com/$1 [R=301,L]
 
   # Remove trailing slash (except for root)
   RewriteCond %{REQUEST_FILENAME} !-d
