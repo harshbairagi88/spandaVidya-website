@@ -541,7 +541,7 @@ const SpecializedSystemsVisual: React.FC<{ isHovered: boolean }> = ({ isHovered 
 // ============================================================================
 // MAIN COMPONENT: SpandaVidya Healthcare Platform & Research Studio
 // ============================================================================
-export const Differentiation: React.FC = () => {
+export const HealthcareIntelligenceSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -921,4 +921,5 @@ export const Differentiation: React.FC = () => {
   );
 };
 
-export default Differentiation;
+export const Differentiation = HealthcareIntelligenceSection;
+export default HealthcareIntelligenceSection;

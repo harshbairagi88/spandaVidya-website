@@ -44,7 +44,7 @@ Our flagship AI application allows users to capture and upload ocular images to 
 
 ## Features
 
-- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, Approach, and Philosophy.
+- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, and Philosophy.
 - **Scroll Animations**: Utilizes custom hooks (`useScrollReveal`, `useCountUp`) and GSAP for engaging scroll-based visibility and number counter animations.
 - **Responsive Components**: Includes reusable UI components like Buttons, Cards, Navbar, and Footer.
 
@@ -77,53 +77,6 @@ Our flagship AI application allows users to capture and upload ocular images to 
 
 ---
 
-## Project Structure
-
-```
-project-root/
-├── components/
-│   ├── Button.tsx
-│   ├── Card.tsx
-│   ├── Footer.tsx
-│   ├── GlobalBackground.tsx
-│   ├── Navbar.tsx
-│   ├── CataractAppPreview.tsx
-│   ├── CataractWorkflow.tsx
-│   └── TechStackItem.tsx
-├── data/
-│   ├── config/
-│   │   ├── branding.ts
-│   │   ├── company.ts
-│   │   └── ...
-│   ├── content/
-│   │   ├── team.ts
-│   │   ├── cataract-detection.ts
-│   │   └── ...
-│   └── index.ts
-├── sections/
-│   ├── Approach.tsx
-│   ├── Challenge.tsx
-│   ├── Contact.tsx
-│   ├── Differentiation.tsx
-│   ├── Hero.tsx
-│   ├── Mission.tsx
-│   ├── PhilosophySection.tsx
-│   ├── Teams.tsx
-│   ├── TechSection.tsx
-│   └── CataractDetection.tsx
-├── App.tsx
-├── index.html
-├── index.tsx
-├── hooks.ts
-├── theme.ts
-├── types.ts
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── metadata.json
-```
-
----
 
 ## Database Models
 [Not found in codebase]

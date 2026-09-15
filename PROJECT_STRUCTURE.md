@@ -52,11 +52,10 @@
 ./README.md
 ./robots.txt
 ./sections
-./sections/Approach.tsx
-./sections/CataractDetection.tsx
+./sections/ApplicationsSection.tsx
 ./sections/Challenge.tsx
 ./sections/Contact.tsx
-./sections/Differentiation.tsx
+./sections/HealthcareIntelligenceSection.tsx
 ./sections/Hero.tsx
 ./sections/Mission.tsx
 ./sections/PhilosophySection.tsx

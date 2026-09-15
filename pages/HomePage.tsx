@@ -2,9 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../sections/Hero';
 import Challenge from '../sections/Challenge';
-import CataractDetection from '../sections/CataractDetection';
-import Approach from '../sections/Approach';
-import Differentiation from '../sections/Differentiation';
+import ApplicationsSection from '../sections/ApplicationsSection';
+import HealthcareIntelligenceSection from '../sections/HealthcareIntelligenceSection';
 import Mission from '../sections/Mission';
 import PhilosophySection from '../sections/PhilosophySection';
 import TechSection from '../sections/TechSection';
@@ -26,12 +25,11 @@ export const HomePage: React.FC = () => {
     <>
       <Hero />
       <Challenge />
-      <CataractDetection />
-      <Approach />
-      <Differentiation />
+      <ApplicationsSection />
+      <TechSection />
+      <HealthcareIntelligenceSection />
       <Mission />
       <PhilosophySection />
-      <TechSection />
       <Team />
       <Contact />
     </>

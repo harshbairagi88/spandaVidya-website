@@ -186,7 +186,7 @@ const RfSignalVisual: React.FC = () => {
 // ============================================================================
 // MAIN COMPONENT: SpandaVidya AI Applications Showcase
 // ============================================================================
-export const CataractDetection: React.FC = () => {
+export const ApplicationsSection: React.FC = () => {
   const [selectedProductIndex, setSelectedProductIndex] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
@@ -600,4 +600,5 @@ export const CataractDetection: React.FC = () => {
   );
 };
 
-export default CataractDetection;
+export const CataractDetection = ApplicationsSection;
+export default ApplicationsSection;
