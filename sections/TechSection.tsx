@@ -2,6 +2,7 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { T } from "../theme";
+import { useReducedMotion } from "../hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,6 +77,7 @@ export default function TechSection() {
   const [paths, setPaths] = useState<PathData[]>([]);
   const [flowActive, setFlowActive] = useState(false);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const reducedMotion = useReducedMotion();
 
   const calculatePaths = useCallback(() => {
     const diagram = diagramRef.current;
@@ -98,7 +100,7 @@ export default function TechSection() {
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
     const ctx = gsap.context(() => {
       const nodes = gsap.utils.toArray<HTMLElement>(".pipeline-node");
       gsap.set(nodes, { autoAlpha: 0, y: 20 });
@@ -114,7 +116,7 @@ export default function TechSection() {
       timeline.to(".pipeline-flow", { autoAlpha: 1, duration: 0.55, ease: "power2.out" }, "+=0.08");
     }, section);
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   useLayoutEffect(() => {
     calculatePaths();

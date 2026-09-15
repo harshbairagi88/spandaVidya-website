@@ -1,5 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
+export function useReducedMotion() {
+  const [reducedMotion, setReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReducedMotion(query.matches);
+    updatePreference();
+    query.addEventListener("change", updatePreference);
+    return () => query.removeEventListener("change", updatePreference);
+  }, []);
+
+  return reducedMotion;
+}
+
 export function useScrollReveal(threshold = 0.15) {
   const ref = useRef<any>(null);
   const [visible, setVisible] = useState(false);

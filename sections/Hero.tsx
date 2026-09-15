@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Button from '../components/Button';
 import { T } from '../theme';
+import { useReducedMotion } from '../hooks';
 
 const Hero: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -9,38 +10,39 @@ const Hero: React.FC = () => {
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const paragraphRef = useRef<HTMLParagraphElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
+  const reducedMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       if (badgeRef.current) {
-        tl.fromTo(badgeRef.current, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55 });
+        tl.fromTo(badgeRef.current, { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 });
       }
 
       if (headingRef.current) {
-        tl.fromTo(headingRef.current, { y: 36, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9 }, '-=0.2');
+        tl.fromTo(headingRef.current, { y: 25, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8 }, '-=0.15');
       }
 
       if (paragraphRef.current) {
-        tl.fromTo(paragraphRef.current, { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.75 }, '-=0.45');
+        tl.fromTo(paragraphRef.current, { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 }, '-=0.38');
       }
 
       if (ctaRef.current) {
         tl.fromTo(
           ctaRef.current.children,
-          { y: 22, autoAlpha: 0, scale: 0.97 },
-          { y: 0, autoAlpha: 1, scale: 1, duration: 0.65, stagger: 0.1 },
+          { y: 15, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.1 },
           '-=0.35'
         );
       }
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section 

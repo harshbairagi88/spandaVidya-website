@@ -1,8 +1,9 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { T } from '../theme';
 import { applicationsData, ProductApplication } from '@/data';
+import { useReducedMotion } from '../hooks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,28 +191,52 @@ export const ApplicationsSection: React.FC = () => {
   const [selectedProductIndex, setSelectedProductIndex] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const tabsRef = useRef<HTMLDivElement | null>(null);
   const showcaseRef = useRef<HTMLDivElement | null>(null);
+  const hasSelectedProductRef = useRef(false);
+  const reducedMotion = useReducedMotion();
 
   const currentProduct: ProductApplication = applicationsData.products[selectedProductIndex];
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
 
     const ctx = gsap.context(() => {
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current.children,
-          { y: 30, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.85,
+            duration: 0.75,
             ease: 'power3.out',
-            stagger: 0.12,
+            stagger: 0.1,
             scrollTrigger: {
               trigger: headerRef.current,
               start: 'top 82%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const showcaseElements = [tabsRef.current, showcaseRef.current].filter(Boolean);
+      if (showcaseElements.length) {
+        gsap.fromTo(
+          showcaseElements,
+          { y: 20, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.7,
+            ease: 'power3.out',
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 68%',
+              once: true,
             },
           }
         );
@@ -219,7 +244,21 @@ export const ApplicationsSection: React.FC = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    const showcase = showcaseRef.current;
+    if (!showcase || reducedMotion) return;
+    if (!hasSelectedProductRef.current) {
+      hasSelectedProductRef.current = true;
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(showcase, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+    }, showcase);
+    return () => ctx.revert();
+  }, [currentProduct.id, reducedMotion]);
 
   const renderProductVisual = (productId: string) => {
     switch (productId) {
@@ -285,6 +324,7 @@ export const ApplicationsSection: React.FC = () => {
         {/* HORIZONTAL PRODUCT SELECTOR (TABS)                           */}
         {/* ============================================================ */}
         <div
+          ref={tabsRef}
           role="tablist"
           aria-label="SpandaVidya Applications"
           className="mb-14 sm:mb-16 grid grid-cols-1 md:grid-cols-3 gap-3 p-2 rounded-2xl border"

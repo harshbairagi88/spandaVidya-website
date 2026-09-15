@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { T } from '../theme';
 import { teamMembers, TeamMember } from '@/data';
+import { useReducedMotion } from '../hooks';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const TeamCard: React.FC<{ member: TeamMember }> = ({ member }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -51,14 +56,57 @@ const TeamCard: React.FC<{ member: TeamMember }> = ({ member }) => {
 };
 
 const Team: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<HTMLDivElement[]>([]);
+  const reducedMotion = useReducedMotion();
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section || reducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { autoAlpha: 0, y: 20 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: section, start: 'top 76%', once: true },
+          }
+        );
+      }
+
+      gsap.fromTo(
+        cardRefs.current,
+        { autoAlpha: 0, y: 20 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 66%', once: true },
+        }
+      );
+    }, section);
+
+    return () => ctx.revert();
+  }, [reducedMotion]);
+
   return (
     <section
+      ref={sectionRef}
       id="team"
       className="relative py-12 px-6 md:px-[8vw] bg-transparent overflow-hidden"
     >
       <div className="relative z-10">
         {/* Heading */}
-        <div className="max-w-3xl mb-20">
+        <div ref={headerRef} className="max-w-3xl mb-20">
           <span 
             className="inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5" 
             style={{ color: T.accent }}
@@ -80,7 +128,9 @@ const Team: React.FC = () => {
         {/* Team Grid */}
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
-            <TeamCard key={index} member={member} />
+            <div key={member.name} ref={(element) => { if (element) cardRefs.current[index] = element; }}>
+              <TeamCard member={member} />
+            </div>
           ))}
         </div>
       </div>

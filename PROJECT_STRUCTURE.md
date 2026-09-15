@@ -20,7 +20,6 @@
 ./data/config/social.ts
 ./data/config/urls.ts
 ./data/content
-./data/content/approach.ts
 ./data/content/cataract-detection.ts
 ./data/content/differentiation.ts
 ./data/content/index.ts

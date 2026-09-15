@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { T } from '../theme';
+import { useReducedMotion } from '../hooks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,25 +11,27 @@ const Challenge: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const contentRef = useRef<HTMLElement | null>(null);
   const visualRef = useRef<HTMLDivElement | null>(null);
+  const reducedMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
 
     const ctx = gsap.context(() => {
       if (contentRef.current) {
         gsap.fromTo(
           contentRef.current.children,
-          { y: 36, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.92,
+            duration: 0.75,
             ease: 'power3.out',
-            stagger: 0.16,
+            stagger: 0.1,
             scrollTrigger: {
               trigger: section,
               start: 'top 75%',
+              once: true,
             },
           }
         );
@@ -37,16 +40,17 @@ const Challenge: React.FC = () => {
       if (visualRef.current) {
         gsap.fromTo(
           visualRef.current,
-          { y: 42, autoAlpha: 0, scale: 0.96 },
+          { y: 20, autoAlpha: 0, scale: 0.97 },
           {
             y: 0,
             autoAlpha: 1,
             scale: 1,
-            duration: 1,
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: section,
               start: 'top 70%',
+              once: true,
             },
           }
         );
@@ -54,7 +58,7 @@ const Challenge: React.FC = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section ref={sectionRef} className="py-6 px-6 md:px-[8vw] bg-red-500 overflow-hidden">

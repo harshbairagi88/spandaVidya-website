@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { T } from '../theme';
 import { differentiationData } from '@/data';
+import { useReducedMotion } from '../hooks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -546,26 +547,28 @@ export const HealthcareIntelligenceSection: React.FC = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [hoveredRowIndex, setHoveredRowIndex] = useState<number | null>(null);
+  const reducedMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
 
     const ctx = gsap.context(() => {
       // Header animation
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current.children,
-          { y: 30, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.85,
+            duration: 0.75,
             ease: 'power3.out',
-            stagger: 0.12,
+            stagger: 0.1,
             scrollTrigger: {
               trigger: section,
               start: 'top 80%',
+              once: true,
             },
           }
         );
@@ -576,15 +579,16 @@ export const HealthcareIntelligenceSection: React.FC = () => {
         if (!row) return;
         gsap.fromTo(
           row,
-          { y: 36, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.85,
+            duration: 0.75,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: row,
               start: 'top 86%',
+              once: true,
             },
           }
         );
@@ -592,7 +596,7 @@ export const HealthcareIntelligenceSection: React.FC = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   const renderVisual = (areaId: string, isHovered: boolean) => {
     switch (areaId) {

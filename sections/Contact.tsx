@@ -4,6 +4,7 @@ import { contact, branding } from '@/data';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '../components/Button';
 import { T } from '../theme';
+import { useReducedMotion } from '../hooks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,25 +49,27 @@ const Contact: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
+  const reducedMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || reducedMotion) return;
 
     const ctx = gsap.context(() => {
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current.children,
-          { y: 34, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.9,
+            duration: 0.75,
             ease: 'power3.out',
-            stagger: 0.14,
+            stagger: 0.1,
             scrollTrigger: {
               trigger: section,
               start: 'top 76%',
+              once: true,
             },
           }
         );
@@ -75,16 +78,17 @@ const Contact: React.FC = () => {
       if (cardRefs.current.length) {
         gsap.fromTo(
           cardRefs.current,
-          { y: 36, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.85,
+            duration: 0.7,
             ease: 'power3.out',
             stagger: 0.12,
             scrollTrigger: {
               trigger: section,
               start: 'top 68%',
+              once: true,
             },
           }
         );
@@ -92,7 +96,7 @@ const Contact: React.FC = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section ref={sectionRef} id="contact" className="py-0 px-6 md:px-[8vw] bg-transparent">

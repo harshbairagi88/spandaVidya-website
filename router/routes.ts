@@ -6,8 +6,7 @@ export const ROUTES = {
 
 export const HASH_ROUTES = {
   HOME: "home",
-  CATARACT_DETECTION: "cataract-detection",
-  APPROACH: "approach",
+  APPLICATIONSECTION: "ApplicationsSection",
   PROGRESS: "progress",
   MISSION: "mission",
   PHILOSOPHY: "philosophy",

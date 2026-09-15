@@ -88,6 +88,17 @@ export const GLOBAL_CSS = `
 
   html { scroll-behavior: smooth; }
 
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+
   body {
     font-family: 'DM Sans', sans-serif;
     background: ${T.ivory};
