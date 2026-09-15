@@ -45,14 +45,14 @@ const Hero: React.FC = () => {
   }, [reducedMotion]);
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="home" 
+    <section
+      ref={sectionRef}
+      id="home"
       className="relative min-h-screen flex items-center px-6 md:px-[8vw] py-2 overflow-hidden bg-transparent"
     >
-      <div className="relative z-10 max-w-5xl">
-        <div 
-          ref={badgeRef} 
+      <div className="relative max-w-5xl">
+        <div
+          ref={badgeRef}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest mb-8"
           style={{
             backgroundColor: "rgba(140, 107, 62, 0.05)",
@@ -61,38 +61,46 @@ const Hero: React.FC = () => {
           }}
         >
           <span className="relative flex h-2 w-2">
-            <span 
+            <span
               className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
               style={{ backgroundColor: T.accent }}
             />
-            <span 
+            <span
               className="relative inline-flex rounded-full h-2 w-2"
               style={{ backgroundColor: T.accent }}
             />
           </span>
           AI-Enabled Health Intelligence
         </div>
-        
-        <h1 
-          ref={headingRef} 
+
+        <h1
+          ref={headingRef}
           className="font-serif text-6xl md:text-8xl font-bold leading-[1.05] mb-8"
           style={{ color: T.charcoal }}
         >
           Digitizing <span style={{ color: T.accent }}>SpandaVidya</span> <br />
           <span className="italic font-medium" style={{ color: "rgba(26, 24, 20, 0.6)" }}>with Signal Intelligence</span>
         </h1>
-        
-        <p 
-          ref={paragraphRef} 
+
+        <p
+          ref={paragraphRef}
           className="text-xl md:text-2xl max-w-2xl mb-12 leading-relaxed font-light"
           style={{ color: T.muted }}
         >
           We leverage high-fidelity sensing and proprietary AI to capture Ayurvedic pulse signals, delivering objective, clinical-grade functional insights for integrative medicine.
         </p>
-        
+
         <div ref={ctaRef} className="flex flex-wrap gap-5">
           <Button href="#cataract-detection" className="shadow-xl">
             OUR SERVICES →
+          </Button>
+          <Button
+            href="https://naadi-raksha-liart.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="outline"
+          >
+            CHAT WITH VEDA AI →
           </Button>
         </div>
       </div>

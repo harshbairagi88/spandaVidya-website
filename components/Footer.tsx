@@ -147,7 +147,8 @@ export const Footer: React.FC = () => {
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
         style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(184, 147, 90, 0.12), transparent 70%)',
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(184, 147, 90, 0.12), transparent 70%)',
         }}
         aria-hidden="true"
       />
@@ -157,12 +158,10 @@ export const Footer: React.FC = () => {
       />
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto">
-        
         {/* ============================================================ */}
         {/* TOP ROW: Large Editorial Contact & Clinical Advisory Notice  */}
         {/* ============================================================ */}
         <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-white/[0.08]">
-          
           {/* Top Left: Large Editorial Email */}
           <div className="lg:col-span-7 p-6 sm:p-8 md:p-12 lg:p-14 lg:border-r border-white/[0.08] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-4">
@@ -187,8 +186,18 @@ export const Footer: React.FC = () => {
                   className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/10 group-hover:border-[#B8935A] group-hover:bg-[#B8935A]/10 text-white/60 group-hover:text-[#D4B896] transition-all duration-200 transform group-hover:translate-x-1 group-hover:-translate-y-0.5 shrink-0"
                   aria-hidden="true"
                 >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                    />
                   </svg>
                 </span>
               </a>
@@ -224,7 +233,10 @@ export const Footer: React.FC = () => {
                 </span>
               </div>
               <p className="text-[11px] sm:text-xs font-mono leading-relaxed text-[#8A8378] uppercase tracking-wider">
-                SPANDAVIDYA IS AN ASSISTIVE PRE-SCREENING & INTEGRATIVE WELLNESS TECHNOLOGY PLATFORM. IT DOES NOT PROVIDE FORMAL MEDICAL DIAGNOSES OR REPLACE EMERGENCY SERVICES. IN AN ACUTE MEDICAL EMERGENCY, CONTACT LOCAL EMERGENCY SERVICES (112) IMMEDIATELY.
+                SPANDAVIDYA IS AN ASSISTIVE PRE-SCREENING & INTEGRATIVE WELLNESS TECHNOLOGY
+                PLATFORM. IT DOES NOT PROVIDE FORMAL MEDICAL DIAGNOSES OR REPLACE EMERGENCY
+                SERVICES. IN AN ACUTE MEDICAL EMERGENCY, CONTACT LOCAL EMERGENCY SERVICES (112)
+                IMMEDIATELY.
               </p>
             </div>
 
@@ -247,7 +259,6 @@ export const Footer: React.FC = () => {
         {/* MAIN COLUMNS GRID: 5 Dedicated Sections with Thin Borders    */}
         {/* ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-b border-white/[0.08]">
-          
           {/* ------------------------------------------------------------ */}
           {/* SECTION 1 — BRAND                                           */}
           {/* ------------------------------------------------------------ */}
@@ -282,7 +293,8 @@ export const Footer: React.FC = () => {
 
               {/* Concise Description */}
               <p className="text-xs sm:text-[13px] leading-relaxed text-[#9E988E] mb-6 font-normal">
-                SpandaVidya brings together artificial intelligence, computer vision, and Ayurvedic knowledge to create accessible digital healthcare experiences.
+                SpandaVidya brings together artificial intelligence, computer vision, and Ayurvedic
+                knowledge to create accessible digital healthcare experiences.
               </p>
             </div>
 
@@ -306,7 +318,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <ul className="space-y-3.5" role="list">
-                {exploreLinks.map((item) => (
+                {exploreLinks.map(item => (
                   <li key={item.label}>
                     {item.isExternal ? (
                       <a
@@ -332,14 +344,18 @@ export const Footer: React.FC = () => {
                             strokeWidth="2"
                             aria-hidden="true"
                           >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
                           </svg>
                         </span>
                       </a>
                     ) : (
                       <a
                         href={item.href}
-                        onClick={(e) => handleItemClick(e, item)}
+                        onClick={e => handleItemClick(e, item)}
                         className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
                       >
                         <span className="transition-transform duration-200 group-hover:translate-x-1">
@@ -372,7 +388,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <ul className="space-y-3.5" role="list">
-                {platformItems.map((item) => (
+                {platformItems.map(item => (
                   <li key={item.label}>
                     {item.isNonClickable ? (
                       <div className="flex items-center justify-between text-xs sm:text-[13px] text-[#6E695F] py-0.5 select-none">
@@ -386,7 +402,7 @@ export const Footer: React.FC = () => {
                     ) : (
                       <a
                         href={item.href}
-                        onClick={(e) => handleItemClick(e, item)}
+                        onClick={e => handleItemClick(e, item)}
                         className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
                       >
                         <span className="transition-transform duration-200 group-hover:translate-x-1">
@@ -421,7 +437,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <ul className="space-y-3.5" role="list">
-                {informationLinks.map((item) => (
+                {informationLinks.map(item => (
                   <li key={item.label}>
                     {item.isRoute ? (
                       <Link
@@ -438,7 +454,7 @@ export const Footer: React.FC = () => {
                     ) : item.isAction ? (
                       <button
                         type="button"
-                        onClick={(e) => handleItemClick(e, item)}
+                        onClick={e => handleItemClick(e, item)}
                         className="group w-full flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5 text-left"
                       >
                         <span className="transition-transform duration-200 group-hover:translate-x-1">
@@ -451,7 +467,7 @@ export const Footer: React.FC = () => {
                     ) : (
                       <a
                         href={item.href}
-                        onClick={(e) => handleItemClick(e, item)}
+                        onClick={e => handleItemClick(e, item)}
                         className="group flex items-center justify-between text-xs sm:text-[13px] text-[#A19C91] hover:text-[#F8F5EF] transition-colors duration-200 py-0.5"
                       >
                         <span className="transition-transform duration-200 group-hover:translate-x-1">
@@ -495,7 +511,7 @@ export const Footer: React.FC = () => {
                     href="mailto:contact@spandavidya.ai"
                     className="text-xs sm:text-[13px] text-[#F8F5EF] hover:text-[#D4B896] transition-colors font-mono break-all"
                   >
-                    contact@spandavidya.ai
+                    contact@spandavidyaai.com
                   </a>
                 </div>
 
@@ -567,7 +583,7 @@ export const Footer: React.FC = () => {
               </p>
               <a
                 href={`#${HASH_ROUTES.CATARACT_DETECTION}`}
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   navigateToSection(`#${HASH_ROUTES.CATARACT_DETECTION}`);
                 }}
@@ -602,9 +618,7 @@ export const Footer: React.FC = () => {
               <h4 className="text-xs font-mono font-semibold tracking-wider text-[#F8F5EF] uppercase mb-1.5">
                 {item.title}
               </h4>
-              <p className="text-[11px] font-mono leading-relaxed text-[#8A8378]">
-                {item.detail}
-              </p>
+              <p className="text-[11px] font-mono leading-relaxed text-[#8A8378]">{item.detail}</p>
             </div>
           ))}
         </div>
@@ -613,12 +627,9 @@ export const Footer: React.FC = () => {
         {/* BOTTOM AREA: Legal Bar & Monospaced Signatures               */}
         {/* ============================================================ */}
         <div className="p-6 sm:p-8 lg:px-10 lg:py-8 flex flex-col lg:flex-row items-center justify-between gap-6 text-[11px] font-mono tracking-wider text-[#8A8378]">
-          
           {/* Left: Copyright */}
           <div className="text-center lg:text-left">
-            <span className="text-[#A19C91]">
-              © 2026 SPANDAVIDYA. ALL RIGHTS RESERVED.
-            </span>
+            <span className="text-[#A19C91]">© 2026 SPANDAVIDYA. ALL RIGHTS RESERVED.</span>
           </div>
 
           {/* Center: Core Pillars */}
@@ -634,14 +645,18 @@ export const Footer: React.FC = () => {
             >
               PRIVACY
             </Link>
-            <span className="text-white/20" aria-hidden="true">•</span>
+            <span className="text-white/20" aria-hidden="true">
+              •
+            </span>
             <Link
               to={ROUTES.TERMS}
               className="text-[#8A8378] hover:text-[#D4B896] transition-colors uppercase tracking-wider"
             >
               TERMS
             </Link>
-            <span className="text-white/20" aria-hidden="true">•</span>
+            <span className="text-white/20" aria-hidden="true">
+              •
+            </span>
             <button
               type="button"
               onClick={() => setIsDisclaimerOpen(true)}
@@ -654,15 +669,12 @@ export const Footer: React.FC = () => {
 
         {/* Technical Footer Signature Strip */}
         <div className="py-3 px-6 lg:px-10 bg-black/40 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] font-mono tracking-[0.25em] text-[#6E695F] uppercase">
-          <div>
-            BUILT WITH INTELLIGENCE. DESIGNED FOR CARE.
-          </div>
+          <div>BUILT WITH INTELLIGENCE. DESIGNED FOR CARE.</div>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5C6E52]" />
             <span>NODE: IIT KANPUR // DISTRIBUTED HEALTH-TECH</span>
           </div>
         </div>
-
       </div>
 
       {/* ============================================================ */}
@@ -678,7 +690,7 @@ export const Footer: React.FC = () => {
         >
           <div
             className="relative w-full max-w-2xl bg-[#0E0D0A] border border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl text-[#F8F5EF] max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
             style={{ borderRadius: '2px' }}
           >
             {/* Modal Header */}
@@ -687,7 +699,10 @@ export const Footer: React.FC = () => {
                 <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono tracking-[0.2em] uppercase text-[#D4B896] bg-white/[0.03] border border-white/10 rounded-sm mb-2">
                   REGULATORY & CLINICAL NOTICE
                 </span>
-                <h3 id="disclaimer-modal-title" className="font-serif text-xl sm:text-2xl font-light text-[#F8F5EF]">
+                <h3
+                  id="disclaimer-modal-title"
+                  className="font-serif text-xl sm:text-2xl font-light text-[#F8F5EF]"
+                >
                   SpandaVidya Medical & Research Disclaimer
                 </h3>
               </div>
@@ -707,28 +722,39 @@ export const Footer: React.FC = () => {
                 <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
                   1. Assistive Pre-Screening Only
                 </strong>
-                SpandaVidya is an investigational health-technology initiative that combines computer vision and Ayurvedic signal intelligence. The assessments provided by the platform—including cataract risk classification and Ayurvedic dosha pulse analysis—are for informational, educational, and pre-screening purposes only.
+                SpandaVidya is an investigational health-technology initiative that combines
+                computer vision and Ayurvedic signal intelligence. The assessments provided by the
+                platform—including cataract risk classification and Ayurvedic dosha pulse
+                analysis—are for informational, educational, and pre-screening purposes only.
               </p>
 
               <p>
                 <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
                   2. Not a Diagnostic Device
                 </strong>
-                SpandaVidya does not deliver formal medical diagnoses, therapeutic prescriptions, or definitive disease management recommendations. It is designed to augment and assist, not replace, clinical examination by board-certified ophthalmologists, licensed Ayurvedic Vaidyas, or general practitioners.
+                SpandaVidya does not deliver formal medical diagnoses, therapeutic prescriptions, or
+                definitive disease management recommendations. It is designed to augment and assist,
+                not replace, clinical examination by board-certified ophthalmologists, licensed
+                Ayurvedic Vaidyas, or general practitioners.
               </p>
 
               <p>
                 <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
                   3. Emergency Situations
                 </strong>
-                If you are experiencing acute eye trauma, sudden vision loss, severe pain, or any medical emergency, do not wait for automated digital assessments. Seek immediate attention at a hospital emergency room or contact emergency services (112 in India / 911 in the US).
+                If you are experiencing acute eye trauma, sudden vision loss, severe pain, or any
+                medical emergency, do not wait for automated digital assessments. Seek immediate
+                attention at a hospital emergency room or contact emergency services (112 in India /
+                911 in the US).
               </p>
 
               <p>
                 <strong className="text-[#F8F5EF] font-medium uppercase font-mono text-xs tracking-wider block mb-1">
                   4. Privacy & Data Architecture
                 </strong>
-                All image uploads and user queries are routed via secure TLS 1.3 encrypted endpoints and processed with strict access governance. We prioritize user privacy and objective algorithmic transparency.
+                All image uploads and user queries are routed via secure TLS 1.3 encrypted endpoints
+                and processed with strict access governance. We prioritize user privacy and
+                objective algorithmic transparency.
               </p>
             </div>
 

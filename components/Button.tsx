@@ -4,6 +4,8 @@ import { T } from '../theme';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline';
   href?: string;
+  target?: string;
+  rel?: string;
   children: React.ReactNode;
 }
 
@@ -52,6 +54,8 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', href, children, cl
     return (
       <a
         href={href}
+        target={props.target}
+        rel={props.rel}
         className={combinedStyles}
         style={combinedInlineStyles}
         onMouseEnter={handleMouseEnter}
