@@ -5,7 +5,7 @@ export interface SEOMetadata {
 
 export const HOME_SEO = {
   title: 'SpandaVidya AI | Healthcare AI & Signal Intelligence',
-  description: 'SpandaVidya AI develops healthcare technology combining AI, computer vision, signal intelligence and digital Naadi research for eye health and infant experiences.',
+  description: 'SpandaVidya AI develops healthcare technology combining AI, computer vision, signal intelligence and digital Naadi research for eye care and infant experiences.',
 } as const satisfies SEOMetadata;
 
 export const PRIVACY_SEO = {

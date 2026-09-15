@@ -637,7 +637,7 @@ export const HealthcareIntelligenceSection: React.FC = () => {
       ref={sectionRef}
       id="differentiation"
       aria-label="What We Are Building — SpandaVidya Healthcare Platform"
-      className="py-24 sm:py-28 md:py-36 px-6 md:px-[8vw] relative bg-transparent overflow-hidden"
+      className="py-12 sm:py-18 md:py-16 px-4 md:px-[8vw] relative bg-transparent overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
 
@@ -675,7 +675,7 @@ export const HealthcareIntelligenceSection: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="mt-20 sm:mt-24 md:mt-28 text-center max-w-3xl mx-auto">
+          <div className="mt-14 sm:mt-14 md:mt-18 text-center max-w-3xl mx-auto">
           {/* Primary Statement */}
           <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal leading-tight text-[#1A1814] mb-3">
             "{differentiationData.closingPrimary}"
@@ -832,7 +832,7 @@ export const HealthcareIntelligenceSection: React.FC = () => {
                 }}
                 onMouseEnter={() => setHoveredRowIndex(idx)}
                 onMouseLeave={() => setHoveredRowIndex(null)}
-                className="group relative py-16 sm:py-20 md:py-24 border-b transition-colors duration-500"
+                className="group relative py-8 sm:py-10 md:py-14 md:px-4 border transition-colors duration-500"
                 style={{
                   borderColor: 'rgba(26, 24, 20, 0.09)',
                   backgroundColor: isHovered ? 'rgba(251, 249, 244, 0.7)' : 'transparent',

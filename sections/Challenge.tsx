@@ -61,7 +61,7 @@ const Challenge: React.FC = () => {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} id="approach" className="py-12 px-6 md:px-[8vw] bg-red-500 overflow-hidden">
+    <section ref={sectionRef} id="approach" className="py-12  px-4 md:px-[8vw] overflow-hidden">
       <div className="grid md:grid-cols-2 gap-20 items-center">
         <article ref={contentRef}>
           <header className="mb-10">

@@ -62,19 +62,19 @@ export default function PhilosophySection() {
     <section
       id="philosophy"
       ref={sectionRef}
-      className="py-32 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
+      className="py-5 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
     >
       {/* Large background text */}
       <div
         className="serif"
         style={{
           position: "absolute",
-          top: "50%",
-          left: "-2%",
+          top: "12%",
+          left: "4.5%",
           transform: "translateY(-50%)",
           fontSize: "clamp(80px, 18vw, 220px)",
-          fontWeight: 300,
-          color: `${T.accent}07`,
+          fontWeight: 900,
+          color: `${T.accent}11`,
           letterSpacing: "-0.05em",
           pointerEvents: "none",
           whiteSpace: "nowrap",
@@ -87,7 +87,7 @@ export default function PhilosophySection() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="mb-20">
+        <div className="mb-10">
           <span
             className={`reveal ${visible ? "visible" : ""} inline-block text-xs font-semibold uppercase tracking-[0.16em] mb-5`}
             style={{ color: T.accent }}

@@ -1,186 +1,176 @@
-# spandavidya-ai-ayurvedic-pulse-diagnostics — AI-powered Ayurvedic pulse diagnostics platform
+# SpandaVidya AI — Healthcare Technology Platform
 
-> spandaVidya - AI-powered Ayurvedic pulse diagnostics platform combining traditional Naadi Pariksha with modern signal intelligence and machine learning for clinical-grade health assessments
+> An AI-powered healthcare technology platform and research initiative developing computer vision, multimodal signal intelligence, non-invasive physiological sensing, and integrative clinical intelligence across life stages.
 
-![License](https://img.shields.io/badge/License-UNLICENSED-blue)
-![Framework](https://img.shields.io/badge/Framework-React-blue)
-![Runtime](https://img.shields.io/badge/Runtime-Node.js-green)
-
----
-
-## Project Overview
-
-spandaVidya is a web platform designed to represent an AI-powered Ayurvedic pulse diagnostics initiative. It focuses on bridging traditional Naadi Pariksha with modern signal intelligence, leveraging machine learning for clinical-grade health assessments.
+![React](https://img.shields.io/badge/React-19.2-blue?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-6.2-purple?logo=vite)
+![React Router](https://img.shields.io/badge/React_Router-7.18-red?logo=react-router)
+![GSAP](https://img.shields.io/badge/GSAP-3.15-green?logo=greensock)
+![License](https://img.shields.io/badge/License-UNLICENSED-lightgrey)
 
 ---
 
-## SpandaVidya AI
+## 🔬 Platform Overview
 
-### Flagship Product: AI Cataract Detection & Analysis
-Our flagship AI application allows users to capture and upload ocular images to obtain instantaneous, secure, and clinical-grade cataract assessment.
+**SpandaVidya AI** bridges ancient Ayurvedic functional principles (*Naadi Pariksha* and systemic diagnostics) with modern machine learning, high-resolution optical computer vision, and radio-frequency signal intelligence.
 
-#### Workflow Pipeline
-1. **Capture Eye Image**: Mobile-guided viewfinder interface aligns camera optics.
-2. **Secure Upload**: End-to-end encrypted transfer via NestJS API.
-3. **AI Analysis**: EfficientNet-B3 neural networks process anterior segment structures.
-4. **Prediction**: Classification of cataract density stages with statistical certainty scoring.
-5. **Clinical Report**: Immediate generation of structured PDF assessment documents.
+Rather than a single diagnostic product, SpandaVidya operates as an integrated healthcare technology ecosystem focused on:
 
-#### Architecture & Tech Stack
-- **Mobile Client**: React Native cross-platform application.
-- **Backend API**: NestJS scalable node framework.
-- **Machine Learning**: EfficientNet-B3 model classification hosted on HuggingFace.
-- **Cloud Storage**: Highly secure, HIPAA-compliant AWS S3 storage buckets.
-- **Computer Vision**: Ocular targeting, region-of-interest segmentation, and optical preprocessing.
+1. **AI-Assisted Diagnostics & Computer Vision**: Optical classification of anterior segment ocular conditions (Cataract AI).
+2. **Early-Life Pediatric Health**: AI-guided acoustic and behavioral understanding for infant development (InfantMind).
+3. **Multimodal Signal Intelligence**: Non-invasive micro-Doppler radar, RF sensing, and PPG arterial pulse waveform analysis.
+4. **Conversational Healthcare Intelligence**: Contextual, non-diagnostic health orientation and integrative medicine assistance (Veda AI).
+5. **Connected Processing Infrastructure**: Unified processing layer linking sensors, clinical devices, and AI inference models.
 
 ---
 
-## Future AI Products
-- **Ayurvedic AI Consultation**: Conversational wellness consultation and Dosha guidance powered by Google Gemini.
-- **AI Pulse Diagnostics**: Digital arterial wave Naadi diagnostics combining high-fidelity PPG signal analysis with classical Ayurvedic science.
-- **Future AI Diagnostics**: Scalable API layer supporting external clinical models and integrations.
+## 📱 Flagship Applications Showcase
+
+The interactive applications showcase (`ApplicationsSection.tsx`) highlights SpandaVidya's three core product pillars:
+
+### 01 / SpandaVidya AI — Cataract AI
+- **Domain**: Eye / Cataract Assessment & Computer Vision
+- **Technology**: EfficientNet-B3 deep convolutional networks, anterior segment optical pre-processing, region-of-interest segmentation.
+- **Workflow Pipeline**: 5-step clinical evaluation (`CAPTURE` → `VALIDATE` → `ANALYZE` → `PREDICT` → `RESULT`).
+- **Production Asset**: `public/app/spandavidyaai.png`
+
+### 02 / InfantMind
+- **Domain**: Early-Life Health & Developmental Understanding
+- **Technology**: Neuro-acoustic frequency spectrum decomposition, acoustic cry classification, caregiver guidance algorithms.
+- **Workflow Pipeline**: Real-time spectral analysis, distress pattern categorization, and structured developmental guidance.
+- **Production Asset**: `public/app/babyapp.png`
+
+### 03 / Signal Intelligence — RF & Pulse Analytics
+- **Domain**: Non-Invasive Contactless Sensing & Arterial Waveform Intelligence
+- **Technology**: Micro-Doppler radio-frequency radar, multi-position photoplethysmography (PPG), digital *Naadi* arterial pulse decomposition.
+- **Workflow Pipeline**: Sub-millimeter mechanical wave acquisition, motion-artifact filtering, and classical functional marker mapping.
+- **Production Asset**: `public/app/rfapp.png`
 
 ---
 
-## Features
+## 💬 Veda AI Consultation
 
-- **Interactive Landing Page**: A single-page layout featuring various sections such as Hero, Challenge, and Philosophy.
-- **Scroll Animations**: Utilizes custom hooks (`useScrollReveal`, `useCountUp`) and GSAP for engaging scroll-based visibility and number counter animations.
-- **Responsive Components**: Includes reusable UI components like Buttons, Cards, Navbar, and Footer.
-
----
-
-## Tech Stack
-
-### Frontend
-| Technology | Purpose |
-|------------|---------|
-| **React** (v19) | Core UI library for building component-based interfaces |
-| **TypeScript** | Static typing for improved code quality and developer experience |
-| **GSAP** | Advanced animations and timeline control |
-
-### Backend
-| Technology | Purpose |
-|------------|---------|
-| [Not found in codebase] | |
-
-### Database & Storage
-| Technology | Purpose |
-|------------|---------|
-| [Not found in codebase] | |
-
-### Dev Tools & Deployment
-| Tool | Purpose |
-|------|---------|
-| **Vite** | Fast frontend build tool and development server |
-| **ESLint** | Code linting and formatting rules |
+SpandaVidya integrates **Veda AI**, a conversational clinical orientation agent delivering integrative health insights and Dosha context:
+- **Application URL**: [https://naadi-raksha-liart.vercel.app/](https://naadi-raksha-liart.vercel.app/)
+- **Integration**: Direct one-click access via the primary Hero CTA (`CHAT WITH VEDA AI →`) opening in a secure, external tab.
 
 ---
 
+## 🏛️ System Architecture & Research Domains
 
-## Database Models
-[Not found in codebase]
+The platform architecture (`HealthcareIntelligenceSection.tsx` & `TechSection.tsx`) organizes SpandaVidya into five core domains:
 
----
-
-## API Reference
-[Not found in codebase]
-
----
-
-## Pages & Routes
-
-| Page | Route | Description |
-|------|-------|-------------|
-| Main Landing | `/` | Single-page layout containing all content sections (Hero, Mission, Tech, etc.) |
-
----
-
-## Authentication & Authorization
-[Not found in codebase]
-
----
-
-## Third-Party Integrations
-
-| Service | Purpose | Library |
-|---------|---------|---------|
-| GSAP | Complex UI animations | `gsap` |
-
----
-
-## Installation & Setup
-
-### Prerequisites
-- Node.js >= 18.0.0
-- npm >= 9.0.0
-
-### 1. Clone
-```bash
-git clone https://github.com/spandavidya/platform
-cd [project folder]
+```
+                          ┌───────────────────────────┐
+                          │   SPANDAVIDYA PLATFORM    │
+                          │    Research Initiative    │
+                          └─────────────┬─────────────┘
+                                        │
+        ┌───────────────────┬───────────┴───────────┬───────────────────┐
+        ▼                   ▼                       ▼                   ▼
+┌──────────────┐    ┌──────────────┐        ┌──────────────┐    ┌──────────────┐
+│Healthcare AI │    │Health Products│       │Research & Dev│    │Life-Stage &  │
+│ Consultation │    │& Device Layer│        │  Pipeline    │    │Specialized AI│
+└──────────────┘    └──────────────┘        └──────────────┘    └──────────────┘
 ```
 
-### 2. Install Dependencies
+1. **Healthcare AI**: Human inquiry → context analysis → holistic health marker orientation.
+2. **Health Products**: Consumer sensors, optical cameras, and wearable pulse-sensing devices.
+3. **Research & Development**: Active multi-centric clinical validation and model benchmarking.
+4. **Care Across Life Stages**: Infant monitoring through geriatric preventive wellness.
+5. **Specialized Systems**: Point-of-care anterior segment triage and digital arterial pulse profiling.
+
+---
+
+## 🗺️ Pages & Routing Architecture
+
+Built using **React Router v7** with code-splitting via `React.lazy` and `Suspense`:
+
+| Route | Layout | Page Component | Description |
+| :--- | :--- | :--- | :--- |
+| `/` | `MainLayout` | `HomePage.tsx` | Interactive single-page experience assembling all feature sections |
+| `/privacy` | `StaticLayout` | `PrivacyPage.tsx` | Complete privacy policy, data governance, and HIPAA/GDPR compliance |
+| `/terms` | `StaticLayout` | `TermsPage.tsx` | Terms of service, platform usage rules, and medical disclaimers |
+| `*` | `StaticLayout` | `NotFoundPage.tsx` | 404 error recovery page with direct home navigation |
+
+### Section Hash Anchors
+Smooth scrolling is handled globally by `router/ScrollManager.tsx`:
+- `#home`: Hero section with dual CTAs (`OUR SERVICES →` and `CHAT WITH VEDA AI →`)
+- `#cataract-detection`: 3-app applications showcase (`ApplicationsSection.tsx`)
+- `#infrastructure` / `#technology` / `#approach`: Signal intelligence processing graph (`TechSection.tsx`)
+- `#differentiation`: Healthcare platform architecture and 5 research domains (`HealthcareIntelligenceSection.tsx`)
+- `#mission`: Mission statement and research objectives (`Mission.tsx`)
+- `#philosophy`: Classical Ayurvedic doshas — Vata, Pitta, Kapha (`PhilosophySection.tsx`)
+- `#team`: Multidisciplinary scientific and clinical team (`Teams.tsx`)
+- `#contact`: Institutional inquiries and partnership channels (`Contact.tsx`)
+
+---
+
+## 🎨 Design System
+
+All aesthetic tokens are centralized in `theme.ts`:
+- **Palette**: Editorial Ivory (`#FAF7F0`), Warm Accent Gold (`#8C6B3E`), Deep Charcoal (`#1A1814`), Soft Olive (`#5C6E52`).
+- **Typography**: Editorial Serif (`Playfair Display` / `Cinzel`), Technical Monospace (`JetBrains Mono`), Clean UI Sans (`Inter`).
+- **Surface Elevation**: Layered glassmorphism with subtle borders (`rgba(140, 107, 62, 0.22)`) and soft ambient shadows.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js**: `>= 18.0.0`
+- **npm**: `>= 9.0.0`
+
+### 1. Installation
 ```bash
+git clone https://github.com/spandavidya/platform.git
+cd platform
 npm install
 ```
 
-### 3. Configure Environment
-Set up the necessary environment variables (see below).
-
-### 4. Start Development Server
+### 2. Development
+Start the local Vite development server:
 ```bash
 npm run dev
 ```
-*(Server will start on `0.0.0.0:3000`)*
+*(Default server: `http://localhost:5173/`)*
 
----
+### 3. Production Build
+Verify TypeScript static typing and create an optimized production bundle:
+```bash
+# Type check
+npx tsc --noEmit
 
-## Environment Variables
+# Production build
+npm run build
+```
 
-```env
-# ── Server ──────────────────────
-PORT=3000
-
-# ── API ─────────────────────────
-GEMINI_API_KEY=[Your Gemini API Key]
+### 4. Preview Build
+Locally preview the generated `dist/` production assets:
+```bash
+npm run preview
 ```
 
 ---
 
-## Available Scripts
+## 📁 Repository Structure
 
-| Script | Command | Description |
-|--------|---------|-------------|
-| `dev` | `vite` | Starts the Vite development server |
-| `build` | `vite build` | Builds the app for production |
-| `preview` | `vite preview` | Locally previews the production build |
-| `lint` | `eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0` | Runs ESLint to check for code issues |
+For the detailed file-by-file directory map, refer to [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md).
 
 ---
 
-## Deployment
-[Not found in codebase]
+## ⚖️ Medical Disclaimer
+
+SpandaVidya AI and its research tools are engineered for screening assistance, physiological research, and wellness orientation. They do not constitute diagnostic medical devices or direct replacements for licensed professional medical consultations.
 
 ---
 
-## Architecture Overview
+## 👥 Research & Organization
 
-- **Overall pattern**: Component-based single-page application (SPA). The main view is assembled in `App.tsx` by importing modular sections and components.
-- **Styling**: Global CSS injected via `theme.ts` alongside utility classes (likely Tailwind, inferred from `className` usage in files like `App.tsx`).
-- **Logic**: Custom React hooks (`hooks.ts`) are used for scroll visibility tracking and animated counters.
-- **Config**: Vite is configured to map `GEMINI_API_KEY` to `process.env.API_KEY` for client-side usage if needed.
-
----
-
-## Author
-
-**spandaVidya Research Initiative <contact@spandavidya.ai>**
-
-[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/spandavidya)
-[![Homepage](https://img.shields.io/badge/Website-blue?logo=vercel)](https://spandavidya.ai)
-
----
+**SpandaVidya Research Initiative**
+- **Website**: [https://www.spandavidyaai.com/](https://www.spandavidyaai.com/)
+- **Contact**: `contact@spandavidya.ai`
+- **GitHub**: [https://github.com/spandavidya](https://github.com/spandavidya)
 
 <p align="center">Built with ❤️ by <strong>SAM</strong></p>

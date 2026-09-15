@@ -35,21 +35,27 @@ const CataractAiVisual: React.FC = () => {
 
       {/* Real Application Image */}
       <div
-        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#0A0908]"
+        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#FAF7F0]"
         style={{ borderColor: 'rgba(140, 107, 62, 0.3)' }}
       >
         <img
           src="/app/spandavidyaai.png"
-          alt="SpandaVidya AI - Cataract AI Application"
+          alt="SpandaVidya AI cataract assessment mobile application"
+          width={1536}
+          height={2752}
           className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
       {/* 5-Step Pipeline Strip */}
       <div className="mt-5 grid grid-cols-5 gap-1.5 pt-4 border-t border-black/[0.06]">
         {['CAPTURE', 'VALIDATE', 'ANALYZE', 'PREDICT', 'RESULT'].map((step, i) => (
-          <div key={step} className="p-2 rounded bg-[#FAF7F0] border border-black/[0.05] text-center">
+          <div
+            key={step}
+            className="p-2 rounded bg-[#FAF7F0] border border-black/[0.05] text-center"
+          >
             <span className="text-[8px] font-mono text-[#8A8378] block">0{i + 1}</span>
             <span className="text-[9px] font-mono font-bold text-[#1A1814] uppercase truncate block">
               {step}
@@ -94,9 +100,12 @@ const InfantMindVisual: React.FC = () => {
       >
         <img
           src="/app/babyapp.png"
-          alt="InfantMind Application"
+          alt="InfantMind early-life visual engagement application"
+          width={853}
+          height={1844}
           className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -159,20 +168,23 @@ const RfSignalVisual: React.FC = () => {
 
       {/* Real Application Image */}
       <div
-        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#0A0908]"
+        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#FAF7F0]"
         style={{ borderColor: 'rgba(140, 107, 62, 0.3)' }}
       >
         <img
           src="/app/rfapp.png"
-          alt="RF Signal Intelligence Telemetry Application"
+          alt="SpandaVidya RF signal intelligence application"
+          width={941}
+          height={1672}
           className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
       {/* Multimodal Stream Inputs */}
       <div className="mt-5 grid grid-cols-4 gap-1.5 pt-4 border-t border-black/[0.06]">
-        {['RF SIGNALS', 'AUDIO SPECTRA', 'MOBILE VISION', 'BLE SENSORS'].map((s) => (
+        {['RF SIGNALS', 'AUDIO SPECTRA', 'MOBILE VISION', 'BLE SENSORS'].map(s => (
           <div key={s} className="p-2 rounded bg-[#FAF7F0] border border-black/[0.05] text-center">
             <span className="text-[9px] font-mono font-bold text-[#1A1814] uppercase block">
               {s}
@@ -276,9 +288,9 @@ export const ApplicationsSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="cataract-detection"
+      id="applications"
       aria-label="SpandaVidya AI Applications"
-      className="py-24 sm:py-28 md:py-36 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
+      className="py-1 sm:py-6 md:py-12 px-6 md:px-[8vw] bg-transparent relative overflow-hidden"
       style={{ borderTop: T.border.light }}
     >
       <div className="relative z-10 max-w-7xl mx-auto">
