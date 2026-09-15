@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Button from '../components/Button';
-import { urls } from '@/data';
 import { T } from '../theme';
 
 const Hero: React.FC = () => {
@@ -90,10 +89,8 @@ const Hero: React.FC = () => {
         </p>
         
         <div ref={ctaRef} className="flex flex-wrap gap-5">
-          <Button href="#approach" className="shadow-xl">Our Technology</Button>
-          <Button href="#contact" variant="outline">Partner & Collaborate</Button>
-          <Button href={urls.chatbotUrl} variant="outline">
-            Try Spandvidya Chatbot
+          <Button href="#cataract-detection" className="shadow-xl">
+            OUR SERVICES →
           </Button>
         </div>
       </div>

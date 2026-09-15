@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from '../types';
-import { branding, urls, navigationLinks } from '@/data';
+import { branding, navigationLinks } from '@/data';
 import { T } from '../theme';
 
 const links = navigationLinks;
@@ -100,16 +100,14 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <a
-              href={urls.chatbotUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#cataract-detection"
               className="group ml-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 backgroundColor: T.accent,
                 boxShadow: `0 8px 24px rgba(140, 107, 62, 0.25)`,
               }}
             >
-              Try it, Chat us
+              OUR SERVICES
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.6} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -150,17 +148,18 @@ const Navbar: React.FC = () => {
               ))}
             </div>
             <a
-              href={urls.chatbotUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-2xl px-6 py-3.5 text-center text-sm font-semibold text-white transition-all duration-300 hover:opacity-95"
+              href="#cataract-detection"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-center text-sm font-semibold text-white transition-all duration-300 hover:opacity-95"
               style={{
                 backgroundColor: T.accent,
                 boxShadow: `0 10px 22px rgba(140, 107, 62, 0.25)`,
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Try it, Chat us
+              OUR SERVICES
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.6} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
           </div>
         )}
