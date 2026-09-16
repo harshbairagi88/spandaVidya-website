@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CataractAiVisual: React.FC = () => {
   return (
     <div
-      className="w-full rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
+      className="w-full max-w-md lg:max-w-[470px] mx-auto rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
       style={{
         backgroundColor: '#FFFFFF',
         borderColor: 'rgba(140, 107, 62, 0.22)',
@@ -33,17 +33,20 @@ const CataractAiVisual: React.FC = () => {
         </span>
       </div>
 
-      {/* Real Application Image */}
+      {/* Real Application Image - Portrait Showcase Container */}
       <div
-        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#FAF7F0]"
-        style={{ borderColor: 'rgba(140, 107, 62, 0.3)' }}
+        className="relative w-full aspect-[3/4] rounded-xl border flex items-center justify-center p-3.5 sm:p-5 overflow-hidden bg-[#FAF7F0]"
+        style={{
+          borderColor: 'rgba(140, 107, 62, 0.28)',
+          boxShadow: 'inset 0 1px 4px rgba(140, 107, 62, 0.04), 0 4px 16px rgba(140, 107, 62, 0.04)',
+        }}
       >
         <img
           src="/app/spandavidyaai.png"
           alt="SpandaVidya AI cataract assessment mobile application"
           width={1536}
           height={2752}
-          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
+          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02] drop-shadow-sm"
           loading="lazy"
           decoding="async"
         />
@@ -73,7 +76,7 @@ const CataractAiVisual: React.FC = () => {
 const InfantMindVisual: React.FC = () => {
   return (
     <div
-      className="w-full rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
+      className="w-full max-w-md lg:max-w-[470px] mx-auto rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
       style={{
         backgroundColor: '#FFFFFF',
         borderColor: 'rgba(184, 147, 90, 0.25)',
@@ -93,17 +96,20 @@ const InfantMindVisual: React.FC = () => {
         </span>
       </div>
 
-      {/* Real Application Image */}
+      {/* Real Application Image - Portrait Showcase Container */}
       <div
-        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#FAF7F0]"
-        style={{ borderColor: 'rgba(184, 147, 90, 0.2)' }}
+        className="relative w-full aspect-[3/4] rounded-xl border flex items-center justify-center p-3.5 sm:p-5 overflow-hidden bg-[#FAF7F0]"
+        style={{
+          borderColor: 'rgba(184, 147, 90, 0.25)',
+          boxShadow: 'inset 0 1px 4px rgba(184, 147, 90, 0.04), 0 4px 16px rgba(184, 147, 90, 0.04)',
+        }}
       >
         <img
           src="/app/babyapp.png"
           alt="InfantMind early-life visual engagement application"
           width={853}
           height={1844}
-          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
+          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02] drop-shadow-sm"
           loading="lazy"
           decoding="async"
         />
@@ -146,7 +152,7 @@ const InfantMindVisual: React.FC = () => {
 const RfSignalVisual: React.FC = () => {
   return (
     <div
-      className="w-full rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
+      className="w-full max-w-md lg:max-w-[470px] mx-auto rounded-2xl border p-5 sm:p-7 transition-all duration-500 shadow-sm"
       style={{
         backgroundColor: '#FFFFFF',
         borderColor: 'rgba(140, 107, 62, 0.22)',
@@ -166,17 +172,20 @@ const RfSignalVisual: React.FC = () => {
         </span>
       </div>
 
-      {/* Real Application Image */}
+      {/* Real Application Image - Portrait Showcase Container */}
       <div
-        className="relative h-72 sm:h-80 md:h-96 rounded-xl border flex items-center justify-center p-3 sm:p-4 overflow-hidden bg-[#FAF7F0]"
-        style={{ borderColor: 'rgba(140, 107, 62, 0.3)' }}
+        className="relative w-full aspect-[3/4] rounded-xl border flex items-center justify-center p-3.5 sm:p-5 overflow-hidden bg-[#FAF7F0]"
+        style={{
+          borderColor: 'rgba(140, 107, 62, 0.28)',
+          boxShadow: 'inset 0 1px 4px rgba(140, 107, 62, 0.04), 0 4px 16px rgba(140, 107, 62, 0.04)',
+        }}
       >
         <img
           src="/app/rfapp.png"
           alt="SpandaVidya RF signal intelligence application"
           width={941}
           height={1672}
-          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02]"
+          className="w-full h-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02] drop-shadow-sm"
           loading="lazy"
           decoding="async"
         />

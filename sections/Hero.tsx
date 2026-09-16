@@ -1,8 +1,8 @@
-import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import React, { useLayoutEffect, useRef } from 'react';
 import Button from '../components/Button';
-import { T } from '../theme';
 import { useReducedMotion } from '../hooks';
+import { T } from '../theme';
 
 const Hero: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -50,29 +50,38 @@ const Hero: React.FC = () => {
       id="home"
       className="relative min-h-screen flex items-center px-6 md:px-[8vw] py-2 overflow-hidden bg-transparent"
     >
+      {/* Large background text */}
+        <div
+          className="
+            serif
+            absolute
+            pointer-events-none
+            select-none
+            whitespace-nowrap
+            z-0
 
-            {/* Large background text */}
-            <div
-              className="serif"
-              style={{
-                position: "absolute",
-                top: "79%",
-                left: "15.5%",
-                transform: "translateY(-50%)",
-                fontSize: "clamp(80px, 18vw, 220px)",
-                fontWeight: 900,
-                color: `${T.accent}11`,
-                letterSpacing: "-0.06em",
-                pointerEvents: "none",
-                whiteSpace: "nowrap",
-                userSelect: "none",
-                zIndex: 0,
-              }}
-            >
-              SpandaVidya
-            </div>
+            top-[13%]
+            left-1/2
+            -translate-x-1/2
+            -translate-y-1/2
+            text-[72px]
 
+            sm:top-[80%]
+            sm:text-[100px]
 
+            md:top-[79%]
+            md:left-[15.5%]
+            md:translate-x-0
+            md:text-[18vw]
+          "
+          style={{
+            fontWeight: 900,
+            color: `${T.accent}11`,
+            letterSpacing: "-0.06em",
+          }}
+        >
+         SpandaVidya
+        </div>
       <div className="relative mt-20 max-w-5xl">
         <div
           ref={badgeRef}

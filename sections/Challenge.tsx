@@ -61,8 +61,8 @@ const Challenge: React.FC = () => {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} id="approach" className="py-12  px-4 md:px-[8vw] overflow-hidden">
-      <div className="grid md:grid-cols-2 gap-20 items-center">
+    <section ref={sectionRef} id="approach" className=" mb-4 px-4 md:px-[8vw] overflow-hidden">
+      <div className="grid md:grid-cols-2 gap-10 items-center">
         <article ref={contentRef}>
           <header className="mb-10">
             <span
@@ -87,7 +87,7 @@ const Challenge: React.FC = () => {
             </blockquote>
           </div>
         </article>
-        <div ref={visualRef} className="relative rounded-[3rem] overflow-hidden aspect-[4/5] mr-8 md:aspect-square shadow-2xl bg-gradient-to-br from-[#f9f9f7] via-[#efefed] to-[#d9d9d9]">
+        <div ref={visualRef} className="relative rounded-[3rem] overflow-hidden aspect-[4/5] md:aspect-square shadow-2xl bg-gradient-to-br from-[#f9f9f7] via-[#efefed] to-[#d9d9d9]">
           <svg
             viewBox="0 0 960 720"
             className="absolute inset-0 w-full h-full"

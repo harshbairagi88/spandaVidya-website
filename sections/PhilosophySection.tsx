@@ -66,20 +66,32 @@ export default function PhilosophySection() {
     >
       {/* Large background text */}
       <div
-        className="serif"
+        className="
+          serif
+          absolute
+          pointer-events-none
+          select-none
+          whitespace-nowrap
+          z-0
+        
+          left-1/2
+          top-[14.5%]
+          -translate-x-1/2
+          -translate-y-1/2
+          text-[70px]
+        
+          sm:top-[14%]
+          sm:text-[95px]
+        
+          md:left-[3.8%]
+          md:top-[14%]
+          md:translate-x-0
+          md:text-[18vw]
+        "
         style={{
-          position: "absolute",
-          top: "12%",
-          left: "4.5%",
-          transform: "translateY(-50%)",
-          fontSize: "clamp(80px, 18vw, 220px)",
           fontWeight: 900,
           color: `${T.accent}11`,
           letterSpacing: "-0.05em",
-          pointerEvents: "none",
-          whiteSpace: "nowrap",
-          userSelect: "none",
-          zIndex: 0,
         }}
       >
         Tridosha
