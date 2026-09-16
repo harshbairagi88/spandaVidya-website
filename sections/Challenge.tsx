@@ -87,7 +87,7 @@ const Challenge: React.FC = () => {
             </blockquote>
           </div>
         </article>
-        <div ref={visualRef} className="relative rounded-[3rem] overflow-hidden aspect-[4/5] md:aspect-square shadow-2xl bg-gradient-to-br from-[#f9f9f7] via-[#efefed] to-[#d9d9d9]">
+        <div ref={visualRef} className="relative rounded-[3rem] overflow-hidden aspect-[4/5] sm:mr-1 mr-3 md:aspect-square shadow-2xl bg-gradient-to-br from-[#f9f9f7] via-[#efefed] to-[#d9d9d9]">
           <svg
             viewBox="0 0 960 720"
             className="absolute inset-0 w-full h-full"
